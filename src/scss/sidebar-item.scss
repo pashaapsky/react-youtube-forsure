@@ -1,0 +1,16 @@
+.sidebar__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  font-size: 10px;
+
+  color: #909090;
+
+  padding: 19px 0;
+
+  &:hover {
+    background-color: rgba(90,90,90,0.8)
+  }
+}

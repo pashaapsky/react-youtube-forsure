@@ -27,5 +27,8 @@ li {
 
 a {
   text-decoration: none;
-  color: white;
+}
+
+.content {
+  display: flex;
 }

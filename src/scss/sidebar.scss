@@ -1,0 +1,11 @@
+.sidebar {
+  flex-basis: 72px;
+  display: flex;
+  justify-content: center;
+
+  background-color: #202020;
+
+  &__menu {
+    width: 100%;
+  }
+}
