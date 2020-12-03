@@ -1,3 +1,14 @@
 .rec-videos {
-  flex: 0.95;
+  flex: auto;
+
+  padding: 20px 20px;
+
+  background-color: #181818;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    color: white;
+  }
 }

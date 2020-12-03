@@ -1,0 +1,23 @@
+.channel-row {
+  display: flex;
+  align-items: center;
+
+  color: white;
+
+  border-bottom: 1px solid rgba(255,255,255,0.8);
+
+  padding-bottom: 20px;
+
+  &__text{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__logo {
+    height: 120px!important;
+    width: 120px!important;
+    margin: 10px 60px;
+  }
+
+
+}

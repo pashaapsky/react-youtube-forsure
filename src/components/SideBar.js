@@ -9,15 +9,27 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import '../scss/sidebar.scss'
+import {NavLink} from "react-router-dom";
 
 function SideBar(props) {
     return (
         <aside className="sidebar">
             <ul className="sidebar__menu">
-                <SideBarItem title="Главная" Icon={HomeIcon}/>
-                <SideBarItem title="В тренде" Icon={WhatshotIcon}/>
-                <SideBarItem title="Подписки" Icon={SubscriptionsIcon}/>
-                <SideBarItem title="Библиотека" Icon={VideoLibraryIcon}/>
+                <NavLink exact to="/">
+                    <SideBarItem title="Главная" Icon={HomeIcon}/>
+                </NavLink>
+
+                <NavLink to="/trending">
+                    <SideBarItem title="В тренде" Icon={WhatshotIcon}/>
+                </NavLink>
+
+                <NavLink to="/subscribes">
+                    <SideBarItem title="Подписки" Icon={SubscriptionsIcon}/>
+                </NavLink>
+
+                <NavLink to="/library">
+                    <SideBarItem title="Библиотека" Icon={VideoLibraryIcon}/>
+                </NavLink>
             </ul>
         </aside>
     );

@@ -41,15 +41,15 @@
     align-items: center;
     height: fit-content;
 
-    button {
+    a {
+      display: flex;
+      align-items: center;
       height: 30px;
       padding: 0 20px;
       background-color: #313131;
-      border: none;
 
       outline: 1px solid #313131;;
 
-      cursor: pointer;
       color: rgba(255, 255, 255, 0.5);
 
       transition: all 0.3s linear;

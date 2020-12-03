@@ -1,0 +1,51 @@
+.search-videos {
+  flex: auto;
+
+  padding: 20px 20px;
+
+  background-color: #181818;
+
+  &__filter {
+    width: 100%;
+
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+
+    margin-bottom: 20px;
+  }
+
+  &__filter-btn {
+    display: flex;
+    align-items: center;
+
+    font-size: 16px;
+    text-transform: uppercase;
+
+    background-color: inherit;
+    outline: none;
+    border: none;
+
+    padding: 6px 16px;
+    margin-left: -18px;
+
+    cursor: pointer;
+
+    color: rgba(255,255,255,0.8);
+
+    transition: all 0.3ms linear;
+
+    &:hover {
+      color: rgba(255,255,255,1);
+    }
+
+    span {
+      margin-left: 10px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    color: white;
+  }
+}
