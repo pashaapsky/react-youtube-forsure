@@ -1,15 +1,18 @@
-import React, {useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
 import youtubeLogo from '../img/youtube-logo.png'
 import "../scss/header.scss"
+import {AuthContext} from "../context/AuthContext";
 
-function Header(props) {
+function Header() {
+    const {isAuthenticated, logout} = useContext(AuthContext);
     const [inputSearch, setInputSearch] = useState('');
 
     return (
@@ -49,12 +52,27 @@ function Header(props) {
 
                 <NotificationsIcon className="action-item" component="svg" />
 
-                <Avatar
-                    className="action-item"
-                    component="div"
-                    alt="Remy Sharp"
-                    src="https://www.flaticon.com/svg/static/icons/svg/145/145843.svg"
-                />
+                {isAuthenticated ? (
+                    <Fragment>
+                        <Avatar
+                            className="action-item"
+                            component="div"
+                            alt="Remy Sharp"
+                            src="https://www.flaticon.com/svg/static/icons/svg/145/145843.svg"
+                        />
+
+                        <div className="user-actions">
+                            <button className="logout-btn" onClick={logout}>Logout</button>
+                        </div>
+                    </Fragment>
+
+                ) : (
+                    <NavLink className="login-link" to="/login">
+                        <AccountCircleIcon className="login-link__icon"/>
+                        Войти
+                    </NavLink>
+                )}
+
             </div>
         </header>
     );
