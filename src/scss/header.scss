@@ -3,12 +3,14 @@
   top: 0;
   z-index: 100;
 
+  flex-wrap: wrap;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
 
-  height: 56px;
+  min-height: 56px;
 
   background-color: #202020;
   color: white;
@@ -25,13 +27,23 @@
       background-color: inherit;
       color: white;
     }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__logo {
+    display: none;
     height: 18px;
     object-fit: contain;
 
     margin-left: 20px;
+
+    @media (min-width: 576px) {
+      display: block;
+    }
   }
 
   &__search {

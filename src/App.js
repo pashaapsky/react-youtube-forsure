@@ -13,17 +13,17 @@ function App() {
             <Header />
 
             <Switch >
-                <Route exact path="/search/:searchTerm" >
-                    <div className="content">
-                        <SideBar />
-                        <SearchVideos />
-                    </div>
-                </Route>
-
                 <Route exact path="/" >
                     <div className="content">
                         <SideBar />
                         <RecommendedVideos />
+                    </div>
+                </Route>
+
+                <Route exact path="/search/:searchTerm" >
+                    <div className="content">
+                        <SideBar />
+                        <SearchVideos />
                     </div>
                 </Route>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import VideoCard from "./VideoCard";
 import TuneIcon from '@material-ui/icons/Tune';
 import "../scss/search-videos.scss"
 import ChannelRow from "./ChannelRow";
