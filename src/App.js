@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
-import axios from './configs/youtube';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import {AuthContext} from './context/AuthContext';
 import Search from "./pages/Search";
+import InTrends from "./pages/InTrends";
 
 
 function App() {
-    const [videos, setVideos] = useState([]);
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
 
@@ -23,10 +22,6 @@ function App() {
         if (data && data.token) {
             setToken(data.token);
             setUser(data.user);
-
-            // localStorage.setItem(storageName, JSON.stringify({
-            //     user, token
-            // }));
         }
     },[]);
 
@@ -36,34 +31,7 @@ function App() {
         localStorage.removeItem('userData');
     };
 
-    const getVideos = async () => {
-        //mostPopular = https://www.googleapis.com/youtube/v3/videos?part=contentDetails&chart=mostPopular&regionCode=IN&key=API_KEY
-        const response = await axios.get('/search', {
-                params: {
-                    q: "fly",
-                    type: "video",
-                    relatedToVideoId: "wtLJPvx7-ys"
-                }
-            })
-                .catch(e => {
-                    console.log(e.message)
-                })
-        ;
-
-        if (response) {
-            setVideos(response.data.items);
-        }
-
-        console.log('response', response);
-        // console.log('videos', videos);
-    };
-
-    // load videos
-    useEffect(() => {
-        // getVideos();
-    }, []);
-
-    console.log(isAuthenticated);
+    console.log('user', user);
 
     return (
         <AuthContext.Provider value={{
@@ -73,11 +41,31 @@ function App() {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <Home/>
+                            <Home />
                         </Route>
 
-                        <Route exact path="/search/:searchTerm">
-                            <Search/>
+                        <Route exact path="/trending/">
+                            <InTrends />
+                        </Route>
+
+                        <Route path="/trending/music">
+                            <InTrends categoryName="Музыка" categoryId={10}/>
+                        </Route>
+
+                        <Route path="/trending/animals">
+                            <InTrends categoryName="Животные" categoryId={15}/>
+                        </Route>
+
+                        <Route path="/trending/games">
+                            <InTrends categoryName="Видео игры" categoryId={20}/>
+                        </Route>
+
+                        <Route path="/trending/films">
+                            <InTrends categoryName="Фильмы" categoryId={1}/>
+                        </Route>
+
+                        <Route path="/search/:searchTerm">
+                            <Search />
                         </Route>
 
                         <Route path="/login">

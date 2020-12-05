@@ -26,7 +26,13 @@ li {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
 
 .App {
@@ -38,6 +44,7 @@ a {
 .content {
   display: flex;
   flex-grow: 1;
+  background-color: #181818;
 }
 
 .visually-hidden {

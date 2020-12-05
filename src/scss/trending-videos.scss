@@ -1,0 +1,86 @@
+.trend-videos {
+  flex: auto;
+
+  color: #aaa;
+
+  background-color: #181818;
+
+  &__container {
+    max-width: 1064px;
+    padding: 0 20px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    color: #fff;
+    margin-top: 20px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    padding: 25px 0 ;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: flex-start;
+
+    font-weight: 500;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid rgba(90, 90, 90, 0.5);
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-decoration: none;
+
+    margin-right: 70px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__item {
+    display: flex;
+
+    .video-card__avatar {
+      display: none;
+    }
+
+    .video-card__attr {
+      display: flex;
+      flex-direction: row;
+
+      margin-bottom: 5px;
+    }
+
+    .video-card__paragraph {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__category-logo {
+    font-size: 90px!important;
+    border-radius: 50%;
+  }
+
+  &__category-title {
+
+  }
+}

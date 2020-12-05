@@ -1,0 +1,19 @@
+.home-videos {
+  flex: auto;
+
+  color: #aaa;
+
+  background-color: #181818;
+
+  margin-top: 24px;
+
+  &__container {
+    max-width: 1064px;
+    padding: 0 20px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+}

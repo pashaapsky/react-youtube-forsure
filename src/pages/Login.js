@@ -35,9 +35,7 @@ function Login(props) {
     });
 
     return (
-        <div>
-            login page
-        </div>
+        <div></div>
     );
 }
 

@@ -34,16 +34,20 @@
     }
   }
 
-  &__logo {
+  &__link {
     display: none;
+    width: 80px;
     height: 18px;
-    object-fit: contain;
 
     margin-left: 20px;
 
     @media (min-width: 576px) {
       display: block;
     }
+  }
+
+  &__logo {
+    object-fit: contain;
   }
 
   &__search {
@@ -78,6 +82,7 @@
 
     svg {
       height: 24px;
+      color: white;
     }
   }
 }
@@ -106,8 +111,15 @@
   }
 }
 
-.action-item {
+.action-btn {
+  border: none;
+  background: none;
+
+  cursor: pointer;
+
   margin-right: 15px;
+
+  outline: none;
 }
 
 .login-link {

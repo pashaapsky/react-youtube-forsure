@@ -1,12 +1,33 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Avatar from "@material-ui/core/Avatar";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../scss/video-card.scss"
-import VerifiedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
+import axios from "../configs/youtube";
 
-function VideoCard({image, title, channel, views, timestamp, channelImage, verified}) {
+function VideoCard({image, title, channel, views, timestamp, channelId, description}) {
+    const [channelImage, setChannelImage] = useState('');
+
+    // получаем изображение для канала
+    const getChannelImage = useCallback(async () => {
+        const result = await axios.get('/channels', {
+            params: {
+                part: "snippet",
+                id: channelId
+            }
+        });
+
+        if (result) {
+            setChannelImage(result.data.items[0].snippet.thumbnails.default.url);
+        }
+    }, [channelId]);
+
+    useEffect(() => {
+        getChannelImage();
+    }, []);
+
 
     return (
-        <div className="rec-videos__item video-card">
+        <div className="trend-videos__item video-card">
             <div className="video-card__img">
                 <img className="" src={image} alt=""/>
             </div>
@@ -16,15 +37,20 @@ function VideoCard({image, title, channel, views, timestamp, channelImage, verif
 
                 <div className="video-card__text">
                     <h4 className="video-card__header">
-                        {title.substr(0, 50)}
+                        {title}
                     </h4>
 
-                    <span className="video-card__paragraph">
-                        {channel} {verified && <VerifiedIcon fontSize="small" style={{marginLeft: "2px", fontSize: "14px"}}/>}
-                    </span>
+                    <div className="video-card__attr">
+                        <span className="video-card__paragraph">
+                            {channel}
+                            <CheckCircleIcon className="video-card__verified"/>
+                        </span>
 
-                    <span className="video-card__paragraph">{views} • </span>
-                    <span className="video-card__paragraph">{timestamp}</span>
+                        <span className="video-card__paragraph">{views}•</span>
+                        <span className="video-card__paragraph">{timestamp}</span>
+                    </div>
+
+                    {description && <p className="video-card__description">{description.substr(0, 100)}...</p>}
                 </div>
             </div>
         </div>

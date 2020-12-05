@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
-import HomeVideos from "../components/HomeVideos";
+import TrendingVideos from "../components/TrendingVideos";
 
-function Home() {
+function InTrends({categoryName, categoryId}) {
     return (
         <Fragment>
             <Header/>
@@ -11,10 +11,10 @@ function Home() {
             <div className="content">
                 <SideBar/>
 
-                <HomeVideos/>
+                <TrendingVideos categoryName={categoryName} categoryId={categoryId}/>
             </div>
         </Fragment>
     );
 }
 
-export default Home;
+export default InTrends;

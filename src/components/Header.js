@@ -22,7 +22,7 @@ function Header() {
                     <MenuIcon component="svg"/>
                 </button>
 
-                <NavLink to="/" >
+                <NavLink className="header__link" to="/" >
                     <img
                         className="header__logo"
                         src={youtubeLogo}
@@ -46,11 +46,17 @@ function Header() {
             </div>
 
             <div className="header__actions">
-                <VideoCallIcon className="action-item" color="inherit" component="svg"/>
+                <button className="action-btn">
+                    <VideoCallIcon color="inherit" component="svg"/>
+                </button>
 
-                <AppsIcon className="action-item" component="svg" />
+                <button className="action-btn">
+                    <AppsIcon className="action-item" component="svg" />
+                </button>
 
-                <NotificationsIcon className="action-item" component="svg" />
+                <button className="action-btn">
+                    <NotificationsIcon className="action-item" component="svg" />
+                </button>
 
                 {isAuthenticated ? (
                     <Fragment>

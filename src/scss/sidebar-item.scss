@@ -6,9 +6,14 @@
 
   font-size: 10px;
 
-  color: #909090;
+  color: #aaa;
+  font-weight: 400;
 
-  padding: 19px 0;
+  padding: 20px 0;
+
+  svg {
+    margin-bottom: 5px;
+  }
 
   &:hover {
     background-color: rgba(90,90,90,0.8)
