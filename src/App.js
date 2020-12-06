@@ -1,11 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import {AuthContext} from './context/AuthContext';
 import Search from "./pages/Search";
 import InTrends from "./pages/InTrends";
-
+import Subscribtions from "./pages/Subscribtions";
+import "./scss/default.scss";
 
 function App() {
     const [token, setToken] = useState(null);
@@ -23,7 +24,7 @@ function App() {
             setToken(data.token);
             setUser(data.user);
         }
-    },[]);
+    }, []);
 
     const logout = () => {
         setToken(null);
@@ -32,6 +33,7 @@ function App() {
     };
 
     console.log('user', user);
+    // console.log('token', token);
 
     return (
         <AuthContext.Provider value={{
@@ -41,11 +43,11 @@ function App() {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <Home />
+                            <Home/>
                         </Route>
 
                         <Route exact path="/trending/">
-                            <InTrends />
+                            <InTrends/>
                         </Route>
 
                         <Route path="/trending/music">
@@ -65,12 +67,18 @@ function App() {
                         </Route>
 
                         <Route path="/search/:searchTerm">
-                            <Search />
+                            <Search/>
                         </Route>
 
                         <Route path="/login">
                             <Login/>
                         </Route>
+
+                        {isAuthenticated &&
+                        <Route excat path="/subscribtions">
+                            <Subscribtions/>
+                        </Route>}
+
 
                         <Redirect to="/"/>
                     </Switch>

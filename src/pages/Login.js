@@ -5,7 +5,9 @@ import {firebaseConfig} from "../configs/firebase";
 import firebase from "firebase";
 
 firebase.initializeApp(firebaseConfig);
+
 const provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/youtube.readonly');
 
 function Login(props) {
     const {setToken, setUser} = useContext(AuthContext);

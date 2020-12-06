@@ -25,30 +25,38 @@ function HomeVideos(props) {
             if (response) {
                 setVideos(response.data.items);
             }
+
         }, []
     );
 
     // load videos
     useEffect(() => {
-        getVideos();
+        // getVideos();
     }, []);
 
 
     return (
-        <div className="home-videos">
+        <div className="content-videos home-videos">
             <div className="home-videos__container">
-                <h2 className="visually-hidden">Пополярные видео</h2>
+                <h2 className="">Пополярные видео</h2>
 
                 <div className="home-videos__list ">
                     {videos.map(video => {
-                        const title = video.snippet.title;
+                        let title = video.snippet.title;
+
+                        if (title.length > 50) {
+                            title = title.substr(0, 50) + "..."
+                        }
+
                         const views = video.statistics.viewCount;
-                        const image = video.snippet.thumbnails.medium.url;
+                        const image = video.snippet.thumbnails.high.url;
                         const channelTitle = video.snippet.channelTitle;
                         const channelId = video.snippet.channelId;
 
+
                         return (
                             <VideoCard
+                                className={"home-videos__item"}
                                 key={video.id}
                                 title={title}
                                 views={`${views} просмотров`}

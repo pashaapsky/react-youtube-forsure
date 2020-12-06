@@ -1,22 +1,21 @@
 import React, {Fragment} from 'react';
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
-import HomeVideos from "../components/HomeVideos";
+import SubscribtionsVideos from "../components/SubscribtionsVideos";
 
 
-function Home() {
-
+function Subscribtions() {
     return (
         <Fragment>
             <Header/>
 
             <div className="content">
-                <SideBar />
+                <SideBar/>
 
-                <HomeVideos/>
+                <SubscribtionsVideos />
             </div>
         </Fragment>
     );
 }
 
-export default Home;
+export default Subscribtions;

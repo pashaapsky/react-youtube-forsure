@@ -15,7 +15,7 @@ function TrendingVideos({categoryName, categoryId}) {
                 part: "statistics,snippet,player,status",
                 chart: "mostPopular",
                 maxResults: maxResults,
-                regionCode: 'RU'
+                regionCode: 'US'
             };
 
             // если фильтруем по категории
@@ -38,13 +38,13 @@ function TrendingVideos({categoryName, categoryId}) {
 
     // load videos
     useEffect(() => {
-        getVideosByCategoryId(categoryId)
+        // getVideosByCategoryId(categoryId)
     }, [getVideosByCategoryId, categoryId]);
 
     console.log('videos', videos);
 
     return (
-        <div className="trend-videos">
+        <div className="content-videos trend-videos">
             <div className="trend-videos__container">
                 <h2 className={`trend-videos__header ${categoryName ? "" : "visually-hidden"}`}>
                     {categoryName ? categoryName : "Пополярные видео"}
@@ -72,12 +72,7 @@ function TrendingVideos({categoryName, categoryId}) {
                     </NavLink>
 
                     <NavLink className="trend-videos__link" to="/trending/animals">
-                        {/*<img*/}
-                        {/*    className="trend-videos__category-logo"*/}
-                        {/*    src="http://youtube.com/img/trending/chips/news_80x80.png"*/}
-                        {/*    alt="category-logo"*/}
-                        {/*/>*/}
-                        <PetsIcon className="trend-videos__category-logo" />
+                        <PetsIcon className="trend-videos__category-logo"/>
 
                         <span className="trend-videos__category-title">Животные</span>
                     </NavLink>
@@ -104,6 +99,7 @@ function TrendingVideos({categoryName, categoryId}) {
 
                         return (
                             <VideoCard
+                                className={"trend-videos__item"}
                                 key={video.id}
                                 title={title}
                                 views={`${views} просмотров`}

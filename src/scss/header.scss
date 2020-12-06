@@ -79,11 +79,16 @@
   &__actions {
     display: flex;
     align-items: center;
+  }
 
-    svg {
-      height: 24px;
-      color: white;
-    }
+
+
+  &__profile-btn {
+    background: none;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
   }
 }
 
@@ -120,6 +125,11 @@
   margin-right: 15px;
 
   outline: none;
+
+  svg {
+    height: 24px;
+    color: white;
+  }
 }
 
 .login-link {
@@ -143,9 +153,5 @@
   &__icon {
     margin-right: 10px;
   }
-}
-
-.logout-btn {
-
 }
 

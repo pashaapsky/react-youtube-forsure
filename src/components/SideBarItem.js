@@ -1,10 +1,9 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
 import '../scss/sidebar-item.scss'
 
-function SideBarItem({title, Icon}) {
+function SideBarItem({className, title, Icon}) {
     return (
-        <li className="sidebar__item">
+        <li className={`${className} sidebar-item`}>
                 <Icon />
                 {title}
         </li>

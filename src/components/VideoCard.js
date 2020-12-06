@@ -4,7 +4,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../scss/video-card.scss"
 import axios from "../configs/youtube";
 
-function VideoCard({image, title, channel, views, timestamp, channelId, description}) {
+function VideoCard({className, image, title, channel, views, timestamp, channelId, description}) {
     const [channelImage, setChannelImage] = useState('');
 
     // получаем изображение для канала
@@ -27,7 +27,7 @@ function VideoCard({image, title, channel, views, timestamp, channelId, descript
 
 
     return (
-        <div className="trend-videos__item video-card">
+        <div className={`${className} video-card`}>
             <div className="video-card__img">
                 <img className="" src={image} alt=""/>
             </div>

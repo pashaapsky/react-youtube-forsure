@@ -1,4 +1,4 @@
-.sidebar__item {
+.sidebar-item {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -6,12 +6,21 @@
 
   font-size: 10px;
 
-  color: #aaa;
+  color: #fff;
   font-weight: 400;
 
   padding: 20px 0;
 
+  &__img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+
+    margin: 0 20px 0 0;
+  }
+
   svg {
+    color: #aaa;
     margin-bottom: 5px;
   }
 

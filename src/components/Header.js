@@ -8,21 +8,48 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
 import youtubeLogo from '../img/youtube-logo.png'
-import "../scss/header.scss"
 import {AuthContext} from "../context/AuthContext";
+import UserActions from "./UserActions";
+import "../scss/header.scss"
 
 function Header() {
-    const {isAuthenticated, logout} = useContext(AuthContext);
+    const {isAuthenticated, user} = useContext(AuthContext);
     const [inputSearch, setInputSearch] = useState('');
+
+    const openSideBarFullMenu = () => {
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarFull = document.querySelector('.sidebar-full');
+        const contentVideos = document.querySelector('.content-videos');
+
+        sidebar.classList.toggle('show');
+        sidebarFull.classList.toggle('show');
+
+        const width = document.querySelector('.sidebar-full').offsetWidth;
+
+        if (width !== 0) {
+            contentVideos.style.marginLeft = `${width}px`;
+        } else {
+            contentVideos.style.marginLeft = 0;
+        }
+    };
+
+    const showProfileActions = () => {
+      const profileActions = document.querySelector('.user-actions');
+
+      profileActions.classList.toggle('show');
+    };
 
     return (
         <header className="header">
             <div className="header__heading">
-                <button className="header__dropdown">
+                <button
+                    className="header__dropdown"
+                    onClick={openSideBarFullMenu}
+                >
                     <MenuIcon component="svg"/>
                 </button>
 
-                <NavLink className="header__link" to="/" >
+                <NavLink className="header__link" title="Главная страница YouTube" to="/">
                     <img
                         className="header__logo"
                         src={youtubeLogo}
@@ -40,36 +67,34 @@ function Header() {
                     onChange={(event) => setInputSearch(event.target.value)}
                 />
 
-                <NavLink to={`/search/${inputSearch}`} className="btn search-btn">
+                <NavLink to={`/search/${inputSearch}`} title="Введите запрос" className="btn search-btn">
                     <SearchIcon className="search-field" component="svg"/>
                 </NavLink>
             </div>
 
             <div className="header__actions">
-                <button className="action-btn">
+                <button className="action-btn" title="Создать">
                     <VideoCallIcon color="inherit" component="svg"/>
                 </button>
 
-                <button className="action-btn">
-                    <AppsIcon className="action-item" component="svg" />
+                <button className="action-btn" title="Приложения YouTube">
+                    <AppsIcon className="action-item" component="svg"/>
                 </button>
 
-                <button className="action-btn">
-                    <NotificationsIcon className="action-item" component="svg" />
+                <button className="action-btn" title="Уведомления">
+                    <NotificationsIcon className="action-item" component="svg"/>
                 </button>
 
                 {isAuthenticated ? (
                     <Fragment>
-                        <Avatar
-                            className="action-item"
-                            component="div"
-                            alt="Remy Sharp"
-                            src="https://www.flaticon.com/svg/static/icons/svg/145/145843.svg"
-                        />
-
-                        <div className="user-actions">
-                            <button className="logout-btn" onClick={logout}>Logout</button>
-                        </div>
+                        <button className="header__profile-btn" onClick={showProfileActions}>
+                            <Avatar
+                                className="action-item"
+                                component="div"
+                                alt="Remy Sharp"
+                                src={user.providerData[0].photoURL}
+                            />
+                        </button>
                     </Fragment>
 
                 ) : (
@@ -79,6 +104,7 @@ function Header() {
                     </NavLink>
                 )}
 
+                {isAuthenticated && <UserActions />}
             </div>
         </header>
     );
