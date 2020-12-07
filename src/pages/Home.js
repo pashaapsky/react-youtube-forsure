@@ -1,11 +1,10 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import HomeVideos from "../components/HomeVideos";
 
 
 function Home() {
-
     return (
         <Fragment>
             <Header/>

@@ -38,7 +38,9 @@ img {
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+
+  overflow: auto;
 }
 
 .content {
@@ -64,6 +66,10 @@ img {
   svg {
     color: #909090 !important;
   }
+}
+
+.content-videos {
+
 }
 
 .show {

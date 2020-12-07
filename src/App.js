@@ -24,7 +24,13 @@ function App() {
             setToken(data.token);
             setUser(data.user);
         }
+
+        localStorage.setItem(storageName, JSON.stringify({
+            token: data.token, user: data.user
+        }));
     }, []);
+
+    console.log('user', user);
 
     const logout = () => {
         setToken(null);
@@ -32,8 +38,6 @@ function App() {
         localStorage.removeItem('userData');
     };
 
-    console.log('user', user);
-    // console.log('token', token);
 
     return (
         <AuthContext.Provider value={{
@@ -43,7 +47,7 @@ function App() {
                 <Router>
                     <Switch>
                         <Route exact path="/">
-                            <Home/>
+                            <Home />
                         </Route>
 
                         <Route exact path="/trending/">
@@ -78,7 +82,6 @@ function App() {
                         <Route excat path="/subscribtions">
                             <Subscribtions/>
                         </Route>}
-
 
                         <Redirect to="/"/>
                     </Switch>

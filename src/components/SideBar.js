@@ -24,7 +24,6 @@ import '../scss/sidebar.scss'
 import {Avatar} from "@material-ui/core";
 
 
-
 function SideBar(props) {
     const {isAuthenticated} = useContext(AuthContext);
 
@@ -110,6 +109,41 @@ function SideBar(props) {
                     ) : (
                         <div className="sidebar-full__divider">
                             <h3 className="sidebar-full__header">Подписки</h3>
+
+                            <NavLink className="no-active" to="" title="channel name">
+                                <li className="sidebar-full__item sidebar-item">
+                                    <Avatar className="sidebar-full__avatar" src="" />
+                                    Channel name
+                                </li>
+                            </NavLink>
+
+                            <NavLink className="no-active" to="" title="channel name">
+                                <li className="sidebar-full__item sidebar-item">
+                                    <Avatar className="sidebar-full__avatar" src="" />
+                                    Channel name
+                                </li>
+                            </NavLink>
+
+                            <NavLink className="no-active" to="" title="channel name">
+                                <li className="sidebar-full__item sidebar-item">
+                                    <Avatar className="sidebar-full__avatar" src="" />
+                                    Channel name
+                                </li>
+                            </NavLink>
+
+                            <NavLink className="no-active" to="" title="channel name">
+                                <li className="sidebar-full__item sidebar-item">
+                                    <Avatar className="sidebar-full__avatar" src="" />
+                                    Channel name
+                                </li>
+                            </NavLink>
+
+                            <NavLink className="no-active" to="" title="channel name">
+                                <li className="sidebar-full__item sidebar-item">
+                                    <Avatar className="sidebar-full__avatar" src="" />
+                                    Channel name
+                                </li>
+                            </NavLink>
 
                             <NavLink className="no-active" to="" title="channel name">
                                 <li className="sidebar-full__item sidebar-item">

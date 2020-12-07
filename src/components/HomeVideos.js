@@ -1,73 +1,48 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import axios from "../configs/youtube";
-import VideoCard from "./VideoCard";
 import "../scss/home-videos.scss"
+import RowsVideosTemplate from "./RowsVideosTemplate";
 
 function HomeVideos(props) {
     const [videos, setVideos] = useState([]);
 
     const getVideos = useCallback(
         async (maxResults = 24) => {
+            try {
+                const params = {
+                    part: "statistics,snippet,player,status",
+                    chart: "mostPopular",
+                    maxResults: maxResults,
+                    regionCode: 'RU'
+                };
 
-            const params = {
-                part: "statistics,snippet,player,status",
-                chart: "mostPopular",
-                maxResults: maxResults,
-                regionCode: 'RU'
-            };
+                const response = await axios.get('/videos', {params})
+                    .catch(e => {
+                        console.log(e.message);
+                    })
+                ;
 
-            const response = await axios.get('/videos', {params})
-                .catch(e => {
-                    console.log(e.message);
-                })
-            ;
-
-            if (response) {
-                setVideos(response.data.items);
+                if (response) {
+                    setVideos(response.data.items);
+                }
+            } catch (e) {
+                console.log(e.message)
             }
-
         }, []
     );
 
     // load videos
     useEffect(() => {
-        // getVideos();
+        getVideos();
     }, []);
 
 
     return (
         <div className="content-videos home-videos">
             <div className="home-videos__container">
-                <h2 className="">Пополярные видео</h2>
+                <h2 className="visually-hidden">Пополярные видео</h2>
 
-                <div className="home-videos__list ">
-                    {videos.map(video => {
-                        let title = video.snippet.title;
-
-                        if (title.length > 50) {
-                            title = title.substr(0, 50) + "..."
-                        }
-
-                        const views = video.statistics.viewCount;
-                        const image = video.snippet.thumbnails.high.url;
-                        const channelTitle = video.snippet.channelTitle;
-                        const channelId = video.snippet.channelId;
-
-
-                        return (
-                            <VideoCard
-                                className={"home-videos__item"}
-                                key={video.id}
-                                title={title}
-                                views={`${views} просмотров`}
-                                timestamp="3 дня назад"
-                                channelId={channelId}
-                                channel={channelTitle}
-                                image={image}
-                            />
-                        )
-                    })}
-                </div>
+                <RowsVideosTemplate videos={videos} className="home-videos__list videos__list"/>
             </div>
         </div>
     );
