@@ -1,24 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import VideoCard from "./VideoCard";
 
 function RowsVideosTemplate({videos, className}) {
     return (
-        <div className={className}>
+        <Fragment>
             {videos.map(video => {
-                let title = video.snippet.title;
-
-                if (title.length > 50) {
-                    title = title.substr(0, 50) + "..."
-                }
+                const title = video.snippet.title;
 
                 const views = video.statistics.viewCount;
-                const image = video.snippet.thumbnails.high.url;
+                const image = video.snippet.thumbnails.medium.url;
                 const channelTitle = video.snippet.channelTitle;
                 const channelId = video.snippet.channelId;
 
                 return (
                     <VideoCard
-                        className={"home-videos__item "}
+                        className={className}
                         key={video.id}
                         title={title}
                         views={`${views} просмотров`}
@@ -29,7 +25,7 @@ function RowsVideosTemplate({videos, className}) {
                     />
                 )
             })}
-        </div>
+        </Fragment>
     );
 }
 

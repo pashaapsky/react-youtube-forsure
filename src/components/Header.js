@@ -24,12 +24,12 @@ function Header() {
         sidebar.classList.toggle('show');
         sidebarFull.classList.toggle('show');
 
-        const width = document.querySelector('.sidebar-full').offsetWidth;
+        const sidebarFullWidth = document.querySelector('.sidebar-full').offsetWidth;
 
-        if (width !== 0) {
-            contentVideos.style.marginLeft = `${width}px`;
+        if (sidebarFullWidth !== 0) {
+            contentVideos.style.marginLeft = `${sidebarFullWidth}px`;
         } else {
-            contentVideos.style.marginLeft = 0;
+            contentVideos.style.marginLeft = `${sidebar.offsetWidth}px`;
         }
     };
 

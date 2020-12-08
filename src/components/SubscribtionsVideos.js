@@ -3,43 +3,23 @@ import VideoCard from "./VideoCard";
 import axios from '../configs/youtube';
 import {AuthContext} from "../context/AuthContext";
 import RowsVideosTemplate from "./RowsVideosTemplate";
+import {DataContext} from "../context/DataContext";
 
 function SubscribtionsVideos() {
     const [videos, setVideos] = useState([]);
-    const {token} = useContext(AuthContext);
+    const {subscribtions} = useContext(DataContext);
 
     const shuffle = (array) => {
         array.sort(() => Math.random() - 0.5);
     };
 
     const getSubscriptionsVideos = useCallback(
-        async (maxResults = 3) => {
+        async (channelsIds, maxResults = 3) => {
             try {
-                let videos = [];
-                let videosId = [];
-
-                // каналы пользователя - id`s
-                const channels = await axios.get('/subscriptions', {
-                        params: {
-                            part: "snippet",
-                            mine: true,
-                            maxResults: 10
-                        },
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                            "Accept": "application/json"
-                        }
-                    })
-                    // id каналов
-                        .then(res => {
-                            return res.data.items.map(item => (
-                                item.snippet.resourceId.channelId
-                            ));
-                        })
-                ;
+                let videosIds = '';
 
                 // несколько видео с каналов - id`s
-                for (const channel of channels) {
+                for (const channel of channelsIds) {
                     const result = await axios.get('/search', {
                         params: {
                             part: "snippet",
@@ -53,22 +33,19 @@ function SubscribtionsVideos() {
                             return res.data.items.map(video => (video.id.videoId))
                         })
                         .then(res => {
-                            videosId = [...res, ...videosId]
+                            videosIds = [...res, ...videosIds]
                         })
                 }
 
                 // видео с полной информацией для отображения
-                for (const item of videosId) {
-                    await axios.get('/videos', {
-                        params: {
-                            part: "statistics,snippet,player,status",
-                            id: item
-                        }
-                    })
-                        .then(res => {
-                            videos = [res.data.items[0], ...videos]
-                        })
-                }
+                const videos = await axios.get('/videos', {
+                    params: {
+                        part: "statistics,snippet,player,status",
+                        id: videosIds.join(',')
+                    }
+                })
+                    .then(res => res.data.items)
+                ;
 
                 await shuffle(videos);
 
@@ -78,13 +55,17 @@ function SubscribtionsVideos() {
             } catch (e) {
                 console.error(e.message);
             }
-        }, [token]
+        }, []
     );
 
     // load videos
     useEffect(() => {
-        // getSubscriptionsVideos();
-    }, []);
+        if (subscribtions) {
+            // id каналов
+            const channelsIds = subscribtions.map(item => item.snippet.resourceId.channelId).splice(0,1);
+            // getSubscriptionsVideos(channelsIds);
+        }
+    }, [subscribtions, getSubscriptionsVideos]);
 
     console.log('videos', videos);
 
@@ -95,7 +76,9 @@ function SubscribtionsVideos() {
                     Пополярные видео у подписчиков
                 </h2>
 
-                <RowsVideosTemplate videos={videos} className="subscribes-videos__list"/>
+                <div className="subscribes-videos__list videos-list">
+                    <RowsVideosTemplate videos={videos} className={"subscribes-videos__item"}/>
+                </div>
             </div>
         </div>
     );

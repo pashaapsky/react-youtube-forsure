@@ -1,17 +1,26 @@
+.videos-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .video-card {
   position: relative;
 
   display: flex;
+  flex-direction: column;
 
-  height: auto;
+  flex: 0 1 24%;
+  width: 24%;
+
   color: #aaa;
 
   margin-bottom: 30px;
 
   &__img {
-    flex: 0 0 246px;
-    width: 246px;
-    height: 140px;
+    flex: 0 0 auto;
+
+    margin-bottom: 10px;
 
     img {
       width: 100%;
@@ -41,7 +50,10 @@
   }
 
   &__header {
-    font-size: 18px;
+    flex-grow: 1;
+
+    font-size: 14px;
+    line-height: calc(20/14);
     font-weight: 500;
     color: #fff;
   }

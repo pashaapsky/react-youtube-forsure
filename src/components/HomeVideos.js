@@ -37,12 +37,16 @@ function HomeVideos(props) {
     }, []);
 
 
+    console.log('videos', videos);
+
     return (
         <div className="content-videos home-videos">
             <div className="home-videos__container">
                 <h2 className="visually-hidden">Пополярные видео</h2>
 
-                <RowsVideosTemplate videos={videos} className="home-videos__list videos__list"/>
+                <div className="home-videos__list videos-list">
+                    <RowsVideosTemplate videos={videos} className="home-videos__item"/>
+                </div>
             </div>
         </div>
     );

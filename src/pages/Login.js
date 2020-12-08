@@ -32,7 +32,7 @@ function Login(props) {
                 }
             )
             .catch(error => {
-
+                console.error(error.message)
             });
     });
 

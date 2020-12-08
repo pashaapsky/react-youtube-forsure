@@ -88,7 +88,7 @@ function TrendingVideos({categoryName, categoryId}) {
                     </NavLink>
                 </div>}
 
-                <div className="trend-videos__list videos__list">
+                <div className="trend-videos__list videos-list">
                     {videos.map(video => {
                         const title = video.snippet.title;
                         const views = video.statistics.viewCount;

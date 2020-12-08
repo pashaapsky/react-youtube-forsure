@@ -1,4 +1,4 @@
-import React, {useContext, Fragment} from 'react';
+import React, {useContext, Fragment, useState, useEffect} from 'react';
 import {NavLink} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
 import SideBarItem from "./SideBarItem";
@@ -20,18 +20,41 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../scss/sidebar.scss'
 import {Avatar} from "@material-ui/core";
+import {DataContext} from "../context/DataContext";
 
 
-function SideBar(props) {
+function SideBar() {
     const {isAuthenticated} = useContext(AuthContext);
+    const {subscribtions} = useContext(DataContext);
+    const [subsToShow, setSubsToShow] = useState([]);
+    const [isShow, setIsShow] = useState(false);
 
-    console.log(isAuthenticated);
+    function declOfNum(number, titles) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+    }
+
+    useEffect(() => {
+        if (subscribtions) {
+            let subs = subscribtions.slice(0);
+
+            if (subscribtions.length > 7 && !isShow) {
+                setSubsToShow(subs.splice(0, 7));
+            } else {
+                setSubsToShow(subscribtions);
+            }
+        }
+    }, [subscribtions, isShow]);
 
     return (
         <Fragment>
             <aside className="sidebar show">
+                <div className="sidebar-full__spacer"/>
+
                 <ul className="sidebar__menu">
                     <NavLink exact to="/" title="Главная">
                         <SideBarItem className="sidebar__item" title="Главная" Icon={HomeIcon}/>
@@ -86,11 +109,13 @@ function SideBar(props) {
                             </NavLink>
 
                             <NavLink className="no-active" to="" title="Смотреть позже">
-                                <SideBarItem className="sidebar-full__item" title="Смотреть позже" Icon={WatchLaterIcon}/>
+                                <SideBarItem className="sidebar-full__item" title="Смотреть позже"
+                                             Icon={WatchLaterIcon}/>
                             </NavLink>
 
                             <NavLink className="no-active" to="" title="Понравившиеся">
-                                <SideBarItem className="sidebar-full__item" title="Понравившиеся" Icon={ThumbUpAltIcon}/>
+                                <SideBarItem className="sidebar-full__item" title="Понравившиеся"
+                                             Icon={ThumbUpAltIcon}/>
                             </NavLink>
                         </Fragment>}
 
@@ -110,54 +135,54 @@ function SideBar(props) {
                         <div className="sidebar-full__divider">
                             <h3 className="sidebar-full__header">Подписки</h3>
 
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
+                            {subsToShow && <Fragment>
+                                {subsToShow.map(item => (
+                                    <a
+                                        key={item.id}
+                                        className="no-active"
+                                        href={`https://www.youtube.com/channel/${item.snippet.resourceId.channelId}`}
+                                        title={item.snippet.title}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <li className="sidebar-full__item sidebar-item">
+                                            <Avatar className="sidebar-full__avatar"
+                                                    src={item.snippet.thumbnails.default.url}/>
+                                            {item.snippet.title.length > 17 ? item.snippet.title.substr(0, 17) + '...' : item.snippet.title}
+                                        </li>
+                                    </a>
+                                ))}
 
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
-
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
-
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
-
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
-
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
-
-                            <NavLink className="no-active" to="" title="channel name">
-                                <li className="sidebar-full__item sidebar-item">
-                                    <Avatar className="sidebar-full__avatar" src="" />
-                                    Channel name
-                                </li>
-                            </NavLink>
+                                {subscribtions.length > 7 && isShow ? (
+                                    <Fragment>
+                                        <NavLink
+                                            className="no-active"
+                                            to=""
+                                            title={`Показать еще ${subscribtions.length - 7} каналов`}
+                                            onClick={() => setIsShow(false)}
+                                        >
+                                            <li className="sidebar-full__item sidebar-item">
+                                                <ExpandLessIcon/>
+                                                Свернуть
+                                            </li>
+                                        </NavLink>
+                                    </Fragment>
+                                ) : (
+                                    <Fragment>
+                                        <NavLink
+                                            className="no-active"
+                                            to=""
+                                            title={`Показать еще ${subscribtions.length - 7} каналов`}
+                                            onClick={() => setIsShow(true)}
+                                        >
+                                            <li className="sidebar-full__item sidebar-item">
+                                                <ExpandMoreIcon/>
+                                                {`Показать еще ${subscribtions.length - 7} ${declOfNum(subscribtions.length - 7, ['канал', 'канала', 'каналов'])}`}
+                                            </li>
+                                        </NavLink>
+                                    </Fragment>
+                                )}
+                            </Fragment>}
                         </div>
                     )}
 
@@ -256,7 +281,8 @@ function SideBar(props) {
 
                         <div className="sidebar-full__divider">
                             <NavLink className="no-active" to="" title="Каталог товаров">
-                                <SideBarItem className="sidebar-full__item" title="Каталог товаров" Icon={AddCircleIcon}/>
+                                <SideBarItem className="sidebar-full__item" title="Каталог товаров"
+                                             Icon={AddCircleIcon}/>
                             </NavLink>
                         </div>
                     </Fragment>}
@@ -266,39 +292,39 @@ function SideBar(props) {
                         <h3 className="sidebar-full__header">Другие возможности</h3>
 
                         <NavLink className="no-active gray" to="" title="YouTube Premium">
-                            <SideBarItem className="sidebar-full__item" title="YouTube Premium" Icon={YouTubeIcon} />
+                            <SideBarItem className="sidebar-full__item" title="YouTube Premium" Icon={YouTubeIcon}/>
                         </NavLink>
 
                         {isAuthenticated && <Fragment>
                             <NavLink className="no-active" to="" title="Фильмы">
-                                <SideBarItem className="sidebar-full__item" title="Фильмы" Icon={TheatersIcon} />
+                                <SideBarItem className="sidebar-full__item" title="Фильмы" Icon={TheatersIcon}/>
                             </NavLink>
 
                             <NavLink className="no-active" to="" title="Видеоигры">
-                                <SideBarItem className="sidebar-full__item" title="Видеоигры" Icon={SportsEsportsIcon} />
+                                <SideBarItem className="sidebar-full__item" title="Видеоигры" Icon={SportsEsportsIcon}/>
                             </NavLink>
                         </Fragment>}
 
                         <NavLink className="no-active" to="" title="Трансляции">
-                            <SideBarItem className="sidebar-full__item" title="Трансляции" Icon={CastIcon} />
+                            <SideBarItem className="sidebar-full__item" title="Трансляции" Icon={CastIcon}/>
                         </NavLink>
                     </div>
 
                     <div className="sidebar-full__divider">
                         <NavLink className="no-active" to="" title="Настройки">
-                            <SideBarItem className="sidebar-full__item" title="Настройки" Icon={SettingsIcon} />
+                            <SideBarItem className="sidebar-full__item" title="Настройки" Icon={SettingsIcon}/>
                         </NavLink>
 
                         <NavLink className="no-active" to="" title="Жалобы">
-                            <SideBarItem className="sidebar-full__item" title="Жалобы" Icon={FlagIcon} />
+                            <SideBarItem className="sidebar-full__item" title="Жалобы" Icon={FlagIcon}/>
                         </NavLink>
 
                         <NavLink className="no-active" to="" title="Справка">
-                            <SideBarItem className="sidebar-full__item" title="Справка" Icon={HelpIcon} />
+                            <SideBarItem className="sidebar-full__item" title="Справка" Icon={HelpIcon}/>
                         </NavLink>
 
                         <NavLink className="no-active" to="" title="Отправить отзыв">
-                            <SideBarItem className="sidebar-full__item" title="Отправить отзыв" Icon={RateReviewIcon} />
+                            <SideBarItem className="sidebar-full__item" title="Отправить отзыв" Icon={RateReviewIcon}/>
                         </NavLink>
                     </div>
 

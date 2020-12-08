@@ -36,9 +36,12 @@ function VideoCard({className, image, title, channel, views, timestamp, channelI
                 <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>
 
                 <div className="video-card__text">
-                    <h4 className="video-card__header">
-                        {title}
-                    </h4>
+                        <h4 className="video-card__header">
+                            <a href="" title={title}>
+                                {title.length > 47 ? title.substr(0, 47) + '...' : title}
+                            </a>
+                        </h4>
+
 
                     <div className="video-card__attr">
                         <span className="video-card__paragraph">

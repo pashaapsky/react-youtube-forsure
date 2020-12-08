@@ -13,34 +13,4 @@
     display: flex;
     flex-direction: column;
   }
-
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    margin-top: 20px;
-  }
-
-  .video-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__item {
-    flex: 0 0 24%;
-    width: 24%;
-
-    .video-card__img {
-      flex: none;
-      max-width: 325px;
-      width: 100%;
-      margin-bottom: 5px;
-    }
-
-    .video-card__header {
-      flex-grow: 1;
-      font-size: 14px;
-    }
-  }
 }
