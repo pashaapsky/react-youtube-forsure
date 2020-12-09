@@ -9,6 +9,7 @@ import InTrends from "./pages/InTrends";
 import Subscribtions from "./pages/Subscribtions";
 import "./scss/default.scss";
 import axios from "./configs/youtube";
+import WatchVideo from "./pages/WatchVideo";
 
 function App() {
     const [token, setToken] = useState(null);
@@ -31,7 +32,7 @@ function App() {
                         params: {
                             part: "snippet",
                             mine: true,
-                            maxResults: 30
+                            maxResults: maxResults
                         },
                         headers: {
                             "Authorization": `Bearer ${token}`,
@@ -44,6 +45,14 @@ function App() {
                     setSubscribtions(channels.data.items);
                 }
             } catch (e) {
+                // 1 часовой OAuth token from firebase handler error
+                const storageName = 'userData';
+                const data = JSON.parse(localStorage.getItem(storageName));
+
+                if (data) {
+                    logout();
+                }
+
                 console.error(e.message)
             }
         }, [token]);
@@ -57,13 +66,11 @@ function App() {
         if (data && data.token) {
             setToken(data.token);
             setUser(data.user);
+
+            localStorage.setItem(storageName, JSON.stringify({
+                token: data.token, user: data.user
+            }));
         }
-
-        localStorage.setItem(storageName, JSON.stringify({
-            token: data.token, user: data.user
-        }));
-
-
     }, []);
 
     // загрузка каналов подписчиков
@@ -113,6 +120,10 @@ function App() {
 
                             <Route path="/search/:searchTerm">
                                 <Search/>
+                            </Route>
+
+                            <Route path="/watch">
+                                <WatchVideo />
                             </Route>
 
                             <Route path="/login">

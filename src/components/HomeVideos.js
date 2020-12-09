@@ -16,17 +16,13 @@ function HomeVideos(props) {
                     regionCode: 'RU'
                 };
 
-                const response = await axios.get('/videos', {params})
-                    .catch(e => {
-                        console.log(e.message);
-                    })
-                ;
+                const response = await axios.get('/videos', {params});
 
                 if (response) {
                     setVideos(response.data.items);
                 }
             } catch (e) {
-                console.log(e.message)
+                console.error(e.message)
             }
         }, []
     );

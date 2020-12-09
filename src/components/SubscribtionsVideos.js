@@ -16,7 +16,7 @@ function SubscribtionsVideos() {
     const getSubscriptionsVideos = useCallback(
         async (channelsIds, maxResults = 3) => {
             try {
-                let videosIds = '';
+                let videosIds = [];
 
                 // несколько видео с каналов - id`s
                 for (const channel of channelsIds) {
@@ -38,19 +38,21 @@ function SubscribtionsVideos() {
                 }
 
                 // видео с полной информацией для отображения
-                const videos = await axios.get('/videos', {
-                    params: {
-                        part: "statistics,snippet,player,status",
-                        id: videosIds.join(',')
+                if (videosIds) {
+                    const videos = await axios.get('/videos', {
+                            params: {
+                                part: "statistics,snippet,player,status",
+                                id: videosIds.join(',')
+                            }
+                        })
+                            .then(res => res.data.items)
+                    ;
+
+                    await shuffle(videos);
+
+                    if (videos) {
+                        setVideos(videos);
                     }
-                })
-                    .then(res => res.data.items)
-                ;
-
-                await shuffle(videos);
-
-                if (videos) {
-                    setVideos(videos);
                 }
             } catch (e) {
                 console.error(e.message);
@@ -63,7 +65,7 @@ function SubscribtionsVideos() {
         if (subscribtions) {
             // id каналов
             const channelsIds = subscribtions.map(item => item.snippet.resourceId.channelId).splice(0,1);
-            // getSubscriptionsVideos(channelsIds);
+            getSubscriptionsVideos(channelsIds);
         }
     }, [subscribtions, getSubscriptionsVideos]);
 

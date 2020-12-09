@@ -1,10 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import {NavLink} from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../scss/video-card.scss"
 import axios from "../configs/youtube";
+import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
-function VideoCard({className, image, title, channel, views, timestamp, channelId, description}) {
+function VideoCard({className, videoId, image, title, channel, views, timestamp, channelId, description, isSearchCard}) {
     const [channelImage, setChannelImage] = useState('');
 
     // получаем изображение для канала
@@ -29,31 +31,58 @@ function VideoCard({className, image, title, channel, views, timestamp, channelI
     return (
         <div className={`${className} video-card`}>
             <div className="video-card__img">
-                <img className="" src={image} alt=""/>
+                <NavLink
+                    to={{
+                        pathname: "/watch",
+                        search: `?v=${videoId}`,
+                    }}
+
+                    title="Перейти к просмотру"
+                >
+                    <img className="" src={image} alt=""/>
+                </NavLink>
             </div>
 
             <div className="video-card__info">
-                <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>
+                {!isSearchCard && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
 
                 <div className="video-card__text">
-                        <h4 className="video-card__header">
+                    <h4 className="video-card__header">
+                        {isSearchCard ? (
+                            <a href="" title={title}>
+                                {title}
+                            </a>
+                        ) : (
                             <a href="" title={title}>
                                 {title.length > 47 ? title.substr(0, 47) + '...' : title}
                             </a>
-                        </h4>
+                        )}
+                    </h4>
 
 
                     <div className="video-card__attr">
-                        <span className="video-card__paragraph">
-                            {channel}
-                            <CheckCircleIcon className="video-card__verified"/>
-                        </span>
+                        <div className="video-card__channel">
+                            {isSearchCard && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
 
-                        <span className="video-card__paragraph">{views}•</span>
-                        <span className="video-card__paragraph">{timestamp}</span>
+                            <a className="video-card__paragraph" href={`http://youtube.com/channel/${channelId}`} target="_blank" rel="noreferrer">
+                                {channel.length > 30 ? channel.substr(0, 30) + '...' : channel}
+                                <CheckCircleIcon className="video-card__verified"/>
+                            </a>
+                        </div>
+
+                        <div className="video-card__time-views">
+                            <span className="video-card__paragraph">{views}&nbsp;•&nbsp;</span>
+                            <span className="video-card__paragraph">{timestamp}</span>
+                        </div>
                     </div>
 
-                    {description && <p className="video-card__description">{description.substr(0, 100)}...</p>}
+                    {description && <p className="video-card__description">
+                        {description.substr(0, 150)}...
+                    </p>}
+
+                    {isSearchCard && <span className="video-card__new-badge">
+                        Новинка
+                    </span>}
                 </div>
             </div>
         </div>

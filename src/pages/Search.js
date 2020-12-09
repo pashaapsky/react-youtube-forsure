@@ -10,6 +10,7 @@ function Search(props) {
             
             <div className="content">
                 <SideBar/>
+
                 <SearchVideos/>
             </div>
         </Fragment>
