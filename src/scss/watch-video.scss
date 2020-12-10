@@ -1,0 +1,13 @@
+.watch-video {
+  display: flex;
+  flex: 1;
+
+  &__player {
+    flex: 1 0 80%;
+    width: 80%;
+  }
+
+  &__similar {
+    width: 20%;
+  }
+}

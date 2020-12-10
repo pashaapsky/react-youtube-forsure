@@ -1,16 +1,22 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {useLocation} from 'react-router-dom';
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
+import VideoPlayer from "../components/YouTubePlayer";
+import '../scss/watch-video.scss'
 
 function WatchVideo(props) {
     const [videoId, setVideoId] = useState(null);
 
     useEffect(() => {
         const params = new URLSearchParams(document.location.search);
+        const videoId = params.get('v');
         console.log(params);
-        console.log('params ', params.get('v'));
-    });
+        console.log('params ', );
+
+        if (videoId) {
+            setVideoId(videoId);
+        }
+    }, []);
 
 
     return (
@@ -21,12 +27,10 @@ function WatchVideo(props) {
                 <SideBar />
 
                 <div className="content-videos watch-video">
-                    <div className="watch-video__container">
-                        <h2 className="visually-hidden">Видео проигрыватель</h2>
+                    <VideoPlayer id={videoId}/>
 
-                        <div className="watch-video__list videos-list">
+                    <div className="watch-video__similar">
 
-                        </div>
                     </div>
                 </div>
             </div>

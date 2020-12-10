@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 function VideoCard({className, videoId, image, title, channel, views, timestamp, channelId, description, isSearchCard}) {
     const [channelImage, setChannelImage] = useState('');
 
+
     // получаем изображение для канала
     const getChannelImage = useCallback(async () => {
         const result = await axios.get('/channels', {
@@ -25,7 +26,7 @@ function VideoCard({className, videoId, image, title, channel, views, timestamp,
 
     useEffect(() => {
         getChannelImage();
-    }, []);
+    }, [getChannelImage]);
 
 
     return (
