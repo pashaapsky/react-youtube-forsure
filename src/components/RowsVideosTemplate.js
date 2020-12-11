@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import VideoCard from "./VideoCard";
 
-function RowsVideosTemplate({videos, className, showDescription, isSearchCard}) {
+function RowsVideosTemplate({videos, className, showDescription, isSearchCard, isWatchCard}) {
     if (videos) {
         return (
             <Fragment>
@@ -31,6 +31,7 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard}) 
                             image={image}
                             description={descriptions}
                             isSearchCard={isSearchCard}
+                            isWatchCard={isWatchCard}
                         />
                     )
                 })}

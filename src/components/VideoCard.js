@@ -6,9 +6,8 @@ import "../scss/video-card.scss"
 import axios from "../configs/youtube";
 import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
-function VideoCard({className, videoId, image, title, channel, views, timestamp, channelId, description, isSearchCard}) {
+function VideoCard({className, videoId, image, title, channel, views, timestamp, channelId, description, isSearchCard, isWatchCard}) {
     const [channelImage, setChannelImage] = useState('');
-
 
     // получаем изображение для канала
     const getChannelImage = useCallback(async () => {
@@ -28,7 +27,6 @@ function VideoCard({className, videoId, image, title, channel, views, timestamp,
         getChannelImage();
     }, [getChannelImage]);
 
-
     return (
         <div className={`${className} video-card`}>
             <div className="video-card__img">
@@ -45,7 +43,7 @@ function VideoCard({className, videoId, image, title, channel, views, timestamp,
             </div>
 
             <div className="video-card__info">
-                {!isSearchCard && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
+                {!(isSearchCard || isWatchCard) && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
 
                 <div className="video-card__text">
                     <h4 className="video-card__header">
