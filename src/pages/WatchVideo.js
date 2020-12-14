@@ -23,24 +23,27 @@ function WatchVideo(props) {
         },
     };
 
-    const getVideo = useCallback(async () => {
-        const video = await axios.get('/videos', {
-            params: {
-                part: "statistics,snippet,status",
-                id: watchVideoId
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const videoId = params.get('v');
+
+        const getVideo = async () => {
+            const video = await axios.get('/videos', {
+                    params: {
+                        part: "statistics,snippet,status",
+                        id: watchVideoId
+                    }
+                })
+                    .then(res => res.data.items[0])
+            ;
+
+
+            if (video) {
+                setPlayingVideo(video);
             }
-        })
-            .then(res => res.data.item[0])
-        ;
+        };
 
-        console.log('video!!', video);
-
-        setPlayingVideo(video);
-
-    }, [watchVideoId]);
-
-    const getSimilarVideos = useCallback(
-        async (maxResults = 24) => {
+        const getSimilarVideos = async (maxResults = 24) => {
             try {
                 let videosIds = '';
 
@@ -79,24 +82,18 @@ function WatchVideo(props) {
             } catch (e) {
                 console.error(e.message)
             }
-        }, [watchVideoId]
-    );
+        };
 
-    useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const videoId = params.get('v');
-
-        // if (videoId) {
         setWatchVideoId(videoId);
 
         if (watchVideoId) {
             getSimilarVideos();
             getVideo();
         }
-        // }
-    }, [location, getSimilarVideos, getVideo, watchVideoId]);
+    }, [location, watchVideoId]);
 
-    console.log('videos', similarVideos);
+
+    // console.log('videos', similarVideos);
     console.log('video', playingVideo);
 
     return (
@@ -104,18 +101,28 @@ function WatchVideo(props) {
             <Header/>
 
             <div className="content">
-                <SideBar />
+                <SideBar/>
 
-                <div className="content-videos watch-video">
+                {playingVideo && <div className="content-videos watch-video">
                     <div className="watch-video__player youtube-player">
                         <YouTube videoId={watchVideoId} opts={opts} containerClassName={'youtube-player__iframe'}/>
 
                         <div className="youtube-player__info">
-                            info
+                            <h4 className="youtube-player__title">{playingVideo.snippet.title}</h4>
+
+                            <div className="youtube-player__statistics">
+                                <span className="youtube-player__views">
+                                    {playingVideo.statistics.viewCount} просмотров &nbsp;•&nbsp;
+                                </span>
+
+                                <span className="youtube-player__date">
+                                    {new Date(playingVideo.snippet.publishedAt).toLocaleDateString()}
+                                </span>
+                            </div>
                         </div>
 
-                        <div className="youtube-player__comments">
-                            qeqe
+                        <div className="youtube-player__channel-info">
+
                         </div>
                     </div>
 
@@ -126,7 +133,7 @@ function WatchVideo(props) {
 
                         <RowsVideosTemplate videos={similarVideos} className="watch-video__item" isWatchCard={true}/>
                     </div>
-                </div>
+                </div>}
             </div>
         </Fragment>
     );

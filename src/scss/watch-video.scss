@@ -3,12 +3,12 @@
   flex: 1;
 
   &__player {
-    flex: 1 0 70%;
-    width: 70%;
+    flex: 1 0 65%;
+    width: 65%;
   }
 
   &__similar {
-    width: 30%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -32,10 +32,11 @@
     margin-bottom: 15px;
 
     .video-card__img {
-      width: 40%;
-      flex: 0 0 40%;
+      height: 94px;
+      width: 168px;
 
-      margin: 0;
+      margin-right: 8px;
+      margin-bottom: 0;
     }
 
     .video-card__header {
@@ -43,8 +44,8 @@
     }
 
     .video-card__info {
-      width: 60%;
-      flex: 0 0 60%;
+      width: auto;
+      flex: 0 1 auto;
     }
   }
 }
