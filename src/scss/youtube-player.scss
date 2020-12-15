@@ -16,6 +16,9 @@
 
   &__info {
     color: #fff;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid rgba(255,255,255, 0.3);
   }
 
   &__title {
@@ -29,8 +32,58 @@
   }
 
   &__statistics {
+    display: flex;
     color: #aaaaaa;
+
   }
 
+  &__statistics-left {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+  }
+
+
+  &__statistics-right {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+
+    div {
+      font-size: 14px;
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      margin-right: 2px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    div a {
+      display: flex;
+      align-items: center;
+
+      padding: 1px 6px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    div svg {
+      width: 30px;
+      height: 30px;
+      padding-right: 5px;
+    }
+  }
+
+
+  &__tag {
+    font-size: 13px;
+    color: #3ea6ff;
+  }
 }
 

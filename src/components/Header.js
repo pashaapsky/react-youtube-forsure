@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useState} from 'react';
+import React, {Fragment, useContext, useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -6,10 +6,12 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Avatar from '@material-ui/core/Avatar';
 import youtubeLogo from '../img/youtube-logo.png'
 import {AuthContext} from "../context/AuthContext";
 import UserActions from "./UserActions";
+
 import "../scss/header.scss"
 
 function Header() {
@@ -17,27 +19,47 @@ function Header() {
     const [inputSearch, setInputSearch] = useState('');
 
     const openSideBarFullMenu = () => {
-        const sidebar = document.querySelector('.sidebar');
         const sidebarFull = document.querySelector('.sidebar-full');
         const contentVideos = document.querySelector('.content-videos');
 
-        sidebar.classList.toggle('show');
         sidebarFull.classList.toggle('show');
 
-        const sidebarFullWidth = document.querySelector('.sidebar-full').offsetWidth;
-
-        if (sidebarFullWidth !== 0) {
-            contentVideos.style.marginLeft = `${sidebarFullWidth}px`;
-        } else {
-            contentVideos.style.marginLeft = `${sidebar.offsetWidth}px`;
+        if (window.innerWidth > 768) {
+            contentVideos.classList.toggle('margined');
         }
     };
 
-    const showProfileActions = () => {
-      const profileActions = document.querySelector('.user-actions');
 
-      profileActions.classList.toggle('show');
+    const openSearch = () => {
+        const headerSearchElem = document.querySelector('.header__search');
+        const headerHeadingElem = document.querySelector('.header__heading');
+        const headerActions = document.querySelector('.header__actions');
+        const searchBackBtn = headerSearchElem.querySelector('.header__search-back');
+
+        headerSearchElem.classList.toggle('show');
+        headerHeadingElem.style.display = 'none';
+        headerActions.style.display = 'none';
+        searchBackBtn.style.display = 'block';
     };
+
+    const closeSearch = () => {
+        const headerSearchElem = document.querySelector('.header__search');
+        const headerHeadingElem = document.querySelector('.header__heading');
+        const headerActions = document.querySelector('.header__actions');
+        const searchBackBtn = headerSearchElem.querySelector('.header__search-back');
+
+        headerSearchElem.classList.toggle('show');
+        headerHeadingElem.style.display = 'flex';
+        headerActions.style.display = 'flex';
+        searchBackBtn.style.display = 'none';
+    };
+
+    const showProfileActions = () => {
+        const profileActions = document.querySelector('.user-actions');
+
+        profileActions.classList.toggle('show');
+    };
+
 
     return (
         <header className="header">
@@ -59,6 +81,10 @@ function Header() {
             </div>
 
             <div className="header__search">
+                <div className="header__search-back">
+                    <ArrowBackIcon onClick={closeSearch}/>
+                </div>
+
                 <input
                     className="input-field"
                     type="text"
@@ -73,6 +99,10 @@ function Header() {
             </div>
 
             <div className="header__actions">
+                <button className="action-btn search-btn" onClick={openSearch} title="Открыть меню поиска">
+                    <SearchIcon className="search-field" component="svg"/>
+                </button>
+
                 <button className="action-btn" title="Создать">
                     <VideoCallIcon color="inherit" component="svg"/>
                 </button>
@@ -100,11 +130,11 @@ function Header() {
                 ) : (
                     <NavLink className="login-link" to="/login">
                         <AccountCircleIcon className="login-link__icon"/>
-                        Войти
+                        <span>Войти</span>
                     </NavLink>
                 )}
 
-                {isAuthenticated && <UserActions />}
+                {isAuthenticated && <UserActions/>}
             </div>
         </header>
     );

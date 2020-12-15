@@ -2,11 +2,19 @@ import React, {Fragment, useCallback, useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom'
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
+import SideBarFull from "../components/SideBarFull";
 import axios from "../configs/youtube";
 import RowsVideosTemplate from "../components/RowsVideosTemplate";
 import YouTube from 'react-youtube'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ReplyIcon from '@material-ui/icons/Reply';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
 import '../scss/watch-video.scss'
 import '../scss/youtube-player.scss'
+
 
 function WatchVideo(props) {
     const [watchVideoId, setWatchVideoId] = useState(null);
@@ -20,6 +28,9 @@ function WatchVideo(props) {
         width: '100%',
         playerVars: {
             autoplay: 1,
+            modestbranding: 1,
+            showinfo: 0,
+            controls: 1
         },
     };
 
@@ -87,7 +98,7 @@ function WatchVideo(props) {
         setWatchVideoId(videoId);
 
         if (watchVideoId) {
-            getSimilarVideos();
+            // getSimilarVideos();
             getVideo();
         }
     }, [location, watchVideoId]);
@@ -101,23 +112,74 @@ function WatchVideo(props) {
             <Header/>
 
             <div className="content">
-                <SideBar/>
+                <SideBar hide={true}/>
+                <SideBarFull/>
 
                 {playingVideo && <div className="content-videos watch-video">
                     <div className="watch-video__player youtube-player">
                         <YouTube videoId={watchVideoId} opts={opts} containerClassName={'youtube-player__iframe'}/>
 
                         <div className="youtube-player__info">
+                            {playingVideo.snippet.tags && (
+                                <div className="youtube-player__tags">
+                                    {playingVideo.snippet.tags.slice(0, 3).map(tag => (
+                                        <a href="" className="youtube-player__tag-link">
+                                            <span className="youtube-player__tag">#{tag.charAt(0).toUpperCase() + tag.slice(1)}&nbsp;</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+
                             <h4 className="youtube-player__title">{playingVideo.snippet.title}</h4>
 
                             <div className="youtube-player__statistics">
-                                <span className="youtube-player__views">
-                                    {playingVideo.statistics.viewCount} просмотров &nbsp;•&nbsp;
-                                </span>
+                                <div className="youtube-player__statistics-left">
+                                    <div className="youtube-player__views">
+                                        {playingVideo.statistics.viewCount} просмотров &nbsp;•&nbsp;
+                                    </div>
 
-                                <span className="youtube-player__date">
-                                    {new Date(playingVideo.snippet.publishedAt).toLocaleDateString()}
-                                </span>
+                                    <div className="youtube-player__date">
+                                        {new Date(playingVideo.snippet.publishedAt).toLocaleDateString()}
+                                    </div>
+                                </div>
+
+                                <div className="youtube-player__statistics-right">
+                                    <div className="youtube-player__likes">
+                                        <a href="#" title="Нравится">
+                                            <ThumbUpIcon/>
+
+                                            {playingVideo.statistics.likeCount}
+                                        </a>
+                                    </div>
+
+                                    <div className="youtube-player__dislikes">
+                                        <a href="#" title="Не нравится">
+                                            <ThumbDownIcon/>
+                                            {playingVideo.statistics.dislikeCount}
+                                        </a>
+                                    </div>
+
+                                    <div className="youtube-player__send">
+                                        <a href="#" title="Поделиться">
+                                            <ReplyIcon/>
+                                            Поделиться
+                                        </a>
+                                    </div>
+
+                                    <div className="youtube-player__save">
+                                        <a href="#" title="Сохранить">
+                                            <PlaylistAddIcon/>
+                                            Сохранить
+                                        </a>
+                                    </div>
+
+                                    <div className="youtube-player__more-options">
+                                        <a href="#">
+                                            <MoreHorizIcon/>
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 

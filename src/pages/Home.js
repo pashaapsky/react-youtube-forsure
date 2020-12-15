@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect} from 'react';
 import Header from "../components/Header";
+import SideBarFull from "../components/SideBarFull";
 import SideBar from "../components/SideBar";
 import HomeVideos from "../components/HomeVideos";
 
@@ -11,6 +12,7 @@ function Home() {
 
             <div className="content">
                 <SideBar />
+                <SideBarFull />
 
                 <HomeVideos/>
             </div>

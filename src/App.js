@@ -52,8 +52,6 @@ function App() {
                 if (data) {
                     logout();
                 }
-
-                console.error(e.message)
             }
         }, [token]);
 
@@ -82,7 +80,6 @@ function App() {
 
     console.log('user', user);
     console.log('subscription', subscribtions);
-
 
     return (
         <AuthContext.Provider value={{

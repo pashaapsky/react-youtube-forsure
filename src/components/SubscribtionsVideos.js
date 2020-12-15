@@ -65,7 +65,7 @@ function SubscribtionsVideos() {
         if (subscribtions) {
             // id каналов
             const channelsIds = subscribtions.map(item => item.snippet.resourceId.channelId).splice(0,1);
-            getSubscriptionsVideos(channelsIds);
+            // getSubscriptionsVideos(channelsIds);
         }
     }, [subscribtions, getSubscriptionsVideos]);
 
@@ -73,7 +73,7 @@ function SubscribtionsVideos() {
 
     return (
         <div className="content-videos subscribes-videos">
-            <div className="subscribes-videos__container">
+            <div className="subscribes-videos__container fixed-container">
                 <h2 className="subscribes-videos__header visually-hidden">
                     Пополярные видео у подписчиков
                 </h2>

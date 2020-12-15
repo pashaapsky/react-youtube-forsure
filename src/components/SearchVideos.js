@@ -60,7 +60,7 @@ function SearchVideos(props) {
 
     return (
         <div className="content-videos search-videos">
-            <div className="search-videos__container">
+            <div className="search-videos__container fixed-container">
                 <h2 className="search-videos__header visually-hidden">Видео по запросу</h2>
 
                 <div className="search-videos__filter videos-list">

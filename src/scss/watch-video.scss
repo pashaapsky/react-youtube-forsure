@@ -2,13 +2,15 @@
   display: flex;
   flex: 1;
 
+  margin-left: 0;
+
   &__player {
-    flex: 1 0 65%;
-    width: 65%;
+    flex: 1 0 70%;
+    width: 70%;
   }
 
   &__similar {
-    width: 35%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

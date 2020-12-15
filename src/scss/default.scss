@@ -71,9 +71,35 @@ img {
 }
 
 .content-videos {
-  margin-left: 72px;
+  margin-left: 0;
+
+  @media (min-width: 576px) {
+    margin-left: 72px;
+  }
 }
 
 .show {
   display: flex;
+}
+
+.margined {
+  margin-left: 240px;
+}
+
+.fixed-container {
+  max-width: 576px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 576px) {
+    max-width: 960px;
+    padding: 0 10px;
+  }
+
+  @media (min-width: 960px) {
+    max-width: 1920px;
+    padding: 0 30px;
+  }
 }

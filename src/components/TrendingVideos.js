@@ -45,7 +45,7 @@ function TrendingVideos({categoryName, categoryId}) {
 
     return (
         <div className="content-videos trend-videos">
-            <div className="trend-videos__container">
+            <div className="trend-videos__container fixed-container">
                 <h2 className={`trend-videos__header ${categoryName ? "" : "visually-hidden"}`}>
                     {categoryName ? categoryName : "Пополярные видео"}
                 </h2>

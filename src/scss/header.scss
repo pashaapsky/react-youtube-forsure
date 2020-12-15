@@ -3,8 +3,6 @@
   top: 0;
   z-index: 100;
 
-  flex-wrap: wrap;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,22 +25,23 @@
       background-color: inherit;
       color: white;
     }
-
-    a {
-      display: flex;
-      align-items: center;
-    }
   }
 
   &__link {
     display: none;
+    align-items: center;
+
     width: 80px;
     height: 18px;
 
-    margin-left: 20px;
+    margin: 0 10px;
 
-    @media (min-width: 576px) {
-      display: block;
+    @media (min-width: 440px) {
+      display: flex;
+    }
+
+    @media (min-width: 768px) {
+      margin-left: 20px;
     }
   }
 
@@ -51,7 +50,7 @@
   }
 
   &__search {
-    display: flex;
+    display: none;
     justify-content: center;
     flex-grow: 1;
     align-items: center;
@@ -74,14 +73,26 @@
         color: rgba(255, 255, 255, 0.8);
       }
     }
+
+    @media (min-width: 576px) {
+      display: flex;
+    }
+  }
+
+
+  &__search-back {
+    display: none;
+    margin-right: 10px;
+
+    @media (min-width: 576px) {
+      display: none;
+    }
   }
 
   &__actions {
     display: flex;
     align-items: center;
   }
-
-
 
   &__profile-btn {
     background: none;
@@ -122,13 +133,17 @@
 
   cursor: pointer;
 
-  margin-right: 15px;
+  margin-right: 13px;
 
   outline: none;
 
   svg {
     height: 24px;
     color: white;
+  }
+
+  @media (min-width: 576px) {
+    margin-right: 15px;
   }
 }
 
@@ -150,8 +165,30 @@
 
   cursor: pointer;
 
+  span {
+    display: none;
+
+    @media (min-width: 576px) {
+      display: inline-block;
+    }
+  }
+
+
   &__icon {
-    margin-right: 10px;
+    margin-right: 0;
+
+    @media (min-width: 576px) {
+      margin-right: 10px;
+    }
+
+  }
+}
+
+.search-btn {
+  display: block;
+
+  @media (min-width: 576px) {
+    display: none;
   }
 }
 

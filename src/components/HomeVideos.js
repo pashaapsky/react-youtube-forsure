@@ -37,7 +37,7 @@ function HomeVideos(props) {
 
     return (
         <div className="content-videos home-videos">
-            <div className="home-videos__container">
+            <div className="home-videos__container fixed-container">
                 <h2 className="visually-hidden">Пополярные видео</h2>
 
                 <div className="home-videos__list videos-list">

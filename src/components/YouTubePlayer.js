@@ -15,6 +15,8 @@ function VideoPlayer({id}) {
             width: '100%',
             playerVars: {
                 autoplay: 1,
+                modestbranding: 1,
+                showinfo: 0,
             },
         });
 
@@ -43,14 +45,6 @@ function VideoPlayer({id}) {
         <div className="watch-video__player youtube-player" >
             <div className="youtube-player__iframe" id={id}>
 
-            </div>
-
-            <div className="youtube-player__info">
-                info
-            </div>
-
-            <div className="youtube-player__comments">
-                qeqe
             </div>
         </div>
     );

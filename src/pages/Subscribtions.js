@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import Header from "../components/Header";
-import SideBar from "../components/SideBar";
+import SideBarFull from "../components/SideBar";
 import SubscribtionsVideos from "../components/SubscribtionsVideos";
 
 
@@ -10,7 +10,7 @@ function Subscribtions() {
             <Header/>
 
             <div className="content">
-                <SideBar/>
+                <SideBarFull/>
 
                 <SubscribtionsVideos />
             </div>
