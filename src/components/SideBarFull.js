@@ -66,17 +66,20 @@ function SideBarFull() {
                         <SideBarItem className="sidebar-full__item" title="В тренде" Icon={WhatshotIcon}/>
                     </NavLink>
 
-                    <NavLink to="/subscribtions" title="Подписки">
-                        <SideBarItem className="sidebar-full__item" title="Подписки" Icon={SubscriptionsIcon}/>
-                    </NavLink>
+                    {isAuthenticated && (
+                        <NavLink to="/subscribtions" title="Подписки">
+                            <SideBarItem className="sidebar-full__item" title="Подписки" Icon={SubscriptionsIcon}/>
+                        </NavLink>
+                    )}
+
                 </div>
 
                 <div className="sidebar-full__divider">
-                    <NavLink to="/library" title="Библиотека">
+                    <NavLink className="no-active" to="" title="Библиотека">
                         <SideBarItem className="sidebar-full__item" title="Библиотека" Icon={VideoLibraryIcon}/>
                     </NavLink>
 
-                    <NavLink to="/history" title="История">
+                    <NavLink className="no-active" to="" title="История">
                         <SideBarItem className="sidebar-full__item" title="История" Icon={HistoryIcon}/>
                     </NavLink>
 

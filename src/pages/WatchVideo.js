@@ -98,7 +98,7 @@ function WatchVideo(props) {
         setWatchVideoId(videoId);
 
         if (watchVideoId) {
-            // getSimilarVideos();
+            getSimilarVideos();
             getVideo();
         }
     }, [location, watchVideoId]);
@@ -124,7 +124,8 @@ function WatchVideo(props) {
                                 <div className="youtube-player__tags">
                                     {playingVideo.snippet.tags.slice(0, 3).map(tag => (
                                         <a href="" className="youtube-player__tag-link">
-                                            <span className="youtube-player__tag">#{tag.charAt(0).toUpperCase() + tag.slice(1)}&nbsp;</span>
+                                            <span
+                                                className="youtube-player__tag">#{tag.charAt(0).toUpperCase() + tag.slice(1)}&nbsp;</span>
                                         </a>
                                     ))}
                                 </div>
@@ -179,12 +180,7 @@ function WatchVideo(props) {
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-
-                        <div className="youtube-player__channel-info">
-
                         </div>
                     </div>
 
@@ -193,7 +189,8 @@ function WatchVideo(props) {
                             Следующее
                         </h4>
 
-                        <RowsVideosTemplate videos={similarVideos} className="watch-video__item" isWatchCard={true}/>
+                        <RowsVideosTemplate videos={similarVideos} className="watch-video__item"
+                                            isWatchCard={true}/>
                     </div>
                 </div>}
             </div>

@@ -1,14 +1,6 @@
 .search-videos {
-  flex: auto;
-
-  padding: 20px 20px;
-
+  width: 100%;
   background-color: #181818;
-
-  &__container {
-    max-width: 1096px;
-    margin: 0 auto;
-  }
 
   &__filter {
     display: flex;
@@ -19,9 +11,7 @@
 
   &__item {
     display: flex;
-    flex-direction: row;
-
-    flex: auto;
+    flex-direction: column;
     width: 100%;
 
     .video-card__header {
@@ -39,14 +29,20 @@
       flex-direction: row;
     }
 
+    .video-card__text {
+      margin-left: 0;
+    }
+
     .video-card__channel {
       margin: 15px 0;
     }
 
     .video-card__img {
-      max-width: 360px;
-      min-width: 240px;
-      flex: 0 1;
+
+    }
+
+    .video-card__info {
+
     }
 
     .video-card__avatar {

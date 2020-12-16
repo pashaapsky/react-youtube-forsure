@@ -20,6 +20,12 @@
     color: white;
 
     padding: 25px 0 ;
+
+    margin: 0;
+
+    @media (min-width: 576px) {
+      margin-top: 30px;
+    }
   }
 
   &__nav {
@@ -53,10 +59,6 @@
       margin-bottom: 0;
     }
 
-    @media (min-width: 720px) {
-
-    }
-
     @media (min-width: 820px) {
       flex: none;
       width: auto;
@@ -71,8 +73,25 @@
   &__item {
     display: flex;
 
+    margin-bottom: 10px;
+
+    @media (min-width: 576px) {
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: 720px) {
+      flex-direction: row;
+    }
+
     .video-card__avatar {
       display: none;
+
+      @media (min-width: 1140px) {
+        display: flex;
+
+        margin-top: 10px;
+        margin-right: 20px;
+      }
     }
 
     .video-card__attr {
@@ -82,11 +101,84 @@
       margin-bottom: 5px;
     }
 
+    .video-card__channel {
+      @media (min-width: 720px) {
+        margin-right: 20px;
+      }
+    }
+
+    .video-card__time-views {
+      @media (min-width: 576px) {
+        flex-direction: row;
+      }
+    }
+
+    .video-card__img {
+      margin-bottom: 0;
+    }
+
+    .video-card__description {
+      @media (min-width: 576px) {
+        font-size: 16px;
+      }
+      
+      @media (min-width: 720px) {
+        font-size: 14px;
+      }
+
+      @media (min-width: 960px) {
+        font-size: 20px;
+      }
+    }
+
+    .video-card__info {
+      display: none;
+
+      @media (min-width: 576px) {
+        display: flex;
+      }
+
+      @media (min-width: 720px) {
+        margin-left: 15px;
+      }
+
+      @media (min-width: 960px) {
+        margin-left: 20px;
+      }
+    }
+
+    .video-card__header {
+
+      @media (min-width: 576px) {
+        flex-grow: 0;
+        font-size: 18px;
+
+        margin-bottom: 5px;
+      }
+
+      @media (min-width: 960px) {
+        font-size: 24px;
+      }
+
+    }
+
+    .video-card__text {
+      margin-left: 0;
+
+      @media (min-width: 576px) {
+
+      }
+    }
+
     .video-card__paragraph {
       margin-right: 10px;
 
       &:last-child {
         margin-right: 0;
+      }
+
+      @media (min-width: 960px) {
+        font-size: 18px;
       }
     }
   }
@@ -108,4 +200,15 @@
   &__category-title {
 
   }
+
+  .video-card {
+    flex: 1 1 100%;
+    width: 100%;
+
+    @media (min-width: 720px) {
+
+    };
+  }
+
+
 }

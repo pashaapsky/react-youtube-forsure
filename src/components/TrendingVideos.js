@@ -25,7 +25,7 @@ function TrendingVideos({categoryName, categoryId}) {
 
             const response = await axios.get('/videos', {params})
                 .catch(e => {
-                    console.log(e.message);
+                    console.error(e.message);
                 })
             ;
 
@@ -38,7 +38,7 @@ function TrendingVideos({categoryName, categoryId}) {
 
     // load videos
     useEffect(() => {
-        // getVideosByCategoryId(categoryId)
+        getVideosByCategoryId(categoryId)
     }, [getVideosByCategoryId, categoryId]);
 
     console.log('videos', videos);
