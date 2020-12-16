@@ -4,9 +4,8 @@ import Avatar from "@material-ui/core/Avatar";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../scss/video-card.scss"
 import axios from "../configs/youtube";
-import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
-function VideoCard({className, videoId, image, title, channel, views, timestamp, channelId, description, isSearchCard, isWatchCard}) {
+function VideoCard({className, videoId, images, title, channel, views, timestamp, channelId, description, isSearchCard, isWatchCard}) {
     const [channelImage, setChannelImage] = useState('');
 
     // получаем изображение для канала
@@ -38,12 +37,39 @@ function VideoCard({className, videoId, image, title, channel, views, timestamp,
 
                     title="Перейти к просмотру"
                 >
-                    <img className="" src={image} alt=""/>
+                    <picture>
+                        <source
+                            media="(max-width: 576px)"
+                            srcSet={`${images.medium}`}
+                        />
+
+                        <source
+                            media="(max-width: 720px)"
+                            srcSet={`${images.high}`}
+                        />
+
+                        <source
+                            media="(max-width: 960px)"
+                            srcSet={`${images.standard}`}
+                        />
+
+                        <source
+                            media="(max-width: 1140px)"
+                            srcSet={`${images.high}`}
+                        />
+
+                        <img
+                            className=""
+                            src={images.high}
+                            alt="Видео"
+                        />
+                    </picture>
                 </NavLink>
             </div>
 
             <div className="video-card__info">
-                {!(isSearchCard || isWatchCard) && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
+                {!(isSearchCard || isWatchCard) &&
+                <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
 
                 <div className="video-card__text">
                     <h4 className="video-card__header">
@@ -63,7 +89,8 @@ function VideoCard({className, videoId, image, title, channel, views, timestamp,
                         <div className="video-card__channel">
                             {isSearchCard && <Avatar className="video-card__avatar" alt={channel} src={channelImage}/>}
 
-                            <a className="video-card__paragraph" href={`http://youtube.com/channel/${channelId}`} target="_blank" rel="noreferrer">
+                            <a className="video-card__paragraph" href={`http://youtube.com/channel/${channelId}`}
+                               target="_blank" rel="noreferrer">
                                 {channel.length > 30 ? channel.substr(0, 30) + '...' : channel}
                                 <CheckCircleIcon className="video-card__verified"/>
                             </a>

@@ -2,23 +2,34 @@
   width: 100%;
   background-color: #181818;
 
+  &__container {
+    @media (min-width: 960px) {
+      width: 90%;
+    }
+  }
+
   &__filter {
     display: flex;
     flex-direction: column;
 
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   &__item {
     display: flex;
     flex-direction: column;
     width: 100%;
+    flex: 0 1 100%;
+
+    @media (min-width: 720px) {
+      flex-direction: row;
+    }
 
     .video-card__header {
       order: 0;
       font-size: 18px;
       font-weight: 400;
-      line-height: calc(24/18);
+      line-height: calc(24 / 18);
       flex-grow: 0;
     }
 
@@ -31,6 +42,11 @@
 
     .video-card__text {
       margin-left: 0;
+
+      @media (min-width: 720px) {
+        display: flex;
+        width: 100%;
+      }
     }
 
     .video-card__channel {
@@ -38,12 +54,59 @@
     }
 
     .video-card__img {
+      margin-bottom: 0;
 
+      @media (min-width: 576px) {
+        margin-bottom: 10px;
+      }
+
+      @media (min-width: 720px) {
+        flex: 0 1 auto;
+        height: 280px;
+
+        margin-right: 10px;
+        margin-bottom: 0;
+      }
+
+      img {
+        object-fit: fill;
+      }
     }
 
     .video-card__info {
+      display: block;
 
+      @media (min-width: 720px) {
+        display: flex;
+        flex: 0 0 40%;
+        flex-grow: 0;
+      }
     }
+
+    .video-card__new-badge {
+      display: none;
+
+      @media (min-width: 576px) {
+        display: inline-block;
+      }
+    }
+
+    .video-card__description {
+
+
+      @media (min-width: 576px) {
+        display: flex;
+      }
+    }
+
+    .video-card__attr {
+      display: none;
+
+      @media (min-width: 576px) {
+        display: flex;
+      }
+    }
+
 
     .video-card__avatar {
       width: 24px;
@@ -68,12 +131,12 @@
 
     cursor: pointer;
 
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 
     transition: all 0.3ms linear;
 
     &:hover {
-      color: rgba(255,255,255,1);
+      color: rgba(255, 255, 255, 1);
     }
 
     span {

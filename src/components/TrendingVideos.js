@@ -92,10 +92,17 @@ function TrendingVideos({categoryName, categoryId}) {
                     {videos.map(video => {
                         const title = video.snippet.title;
                         const views = video.statistics.viewCount;
-                        const image = video.snippet.thumbnails.medium.url;
                         const channelTitle = video.snippet.channelTitle;
                         const channelId = video.snippet.channelId;
                         const description = video.snippet.description;
+
+                        const images = {
+                            default : video.snippet.thumbnails.default ? video.snippet.thumbnails.default.url : '',     //120x90
+                            medium : video.snippet.thumbnails.medium ? video.snippet.thumbnails.medium.url : '',        //320x180
+                            high : video.snippet.thumbnails.high ? video.snippet.thumbnails.high.url : '',              //480x360
+                            standard : video.snippet.thumbnails.standard ? video.snippet.thumbnails.standard.url : '',  //640x480
+                            maxres : video.snippet.thumbnails.maxres ? video.snippet.thumbnails.maxres.url : '',        //1280x720
+                        };
 
                         return (
                             <VideoCard
@@ -106,7 +113,7 @@ function TrendingVideos({categoryName, categoryId}) {
                                 timestamp="3 дня назад"
                                 channelId={channelId}
                                 channel={channelTitle}
-                                image={image}
+                                images={images}
                                 description={description}
                             />
                         )

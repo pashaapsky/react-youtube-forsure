@@ -1,5 +1,9 @@
 import React, {Fragment} from 'react';
+import moment from "moment";
+import 'moment/locale/ru';
 import VideoCard from "./VideoCard";
+
+moment.locale('ru');
 
 function RowsVideosTemplate({videos, className, showDescription, isSearchCard, isWatchCard}) {
     if (videos) {
@@ -7,9 +11,19 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
             <Fragment>
                 {videos.map(video => {
                     const title = video.snippet.title;
+                    const views = new Number(video.statistics.viewCount).toLocaleString('ru-RU');
 
-                    const views = video.statistics.viewCount;
-                    const image = video.snippet.thumbnails.medium.url;
+                    const images = {
+                        default : video.snippet.thumbnails.default ? video.snippet.thumbnails.default.url : '',     //120x90
+                        medium : video.snippet.thumbnails.medium ? video.snippet.thumbnails.medium.url : '',        //320x180
+                        high : video.snippet.thumbnails.high ? video.snippet.thumbnails.high.url : '',              //480x360
+                        standard : video.snippet.thumbnails.standard ? video.snippet.thumbnails.standard.url : '',  //640x480
+                        maxres : video.snippet.thumbnails.maxres ? video.snippet.thumbnails.maxres.url : '',        //1280x720
+                    };
+
+
+                    const timeFromPublish = moment(video.snippet.publishedAt).fromNow();
+
                     const channelTitle = video.snippet.channelTitle;
                     const channelId = video.snippet.channelId;
 
@@ -25,10 +39,10 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
                             videoId={video.id}
                             title={title}
                             views={`${views} просмотров`}
-                            timestamp="3 дня назад"
+                            timestamp={timeFromPublish}
                             channelId={channelId}
                             channel={channelTitle}
-                            image={image}
+                            images={images}
                             description={descriptions}
                             isSearchCard={isSearchCard}
                             isWatchCard={isWatchCard}

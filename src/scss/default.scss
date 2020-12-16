@@ -25,6 +25,10 @@ li {
   list-style-type: none;
 }
 
+p {
+  word-break: break-word;
+}
+
 a {
   color: inherit;
   text-decoration: none;

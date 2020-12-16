@@ -1,4 +1,5 @@
-import React, {Fragment, useCallback, useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
+import {NavLink} from "react-router-dom";
 import {useLocation} from 'react-router-dom'
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
@@ -123,10 +124,10 @@ function WatchVideo(props) {
                             {playingVideo.snippet.tags && (
                                 <div className="youtube-player__tags">
                                     {playingVideo.snippet.tags.slice(0, 3).map(tag => (
-                                        <a href="" className="youtube-player__tag-link">
+                                        <NavLink to="" className="youtube-player__tag-link no-active">
                                             <span
                                                 className="youtube-player__tag">#{tag.charAt(0).toUpperCase() + tag.slice(1)}&nbsp;</span>
-                                        </a>
+                                        </NavLink>
                                     ))}
                                 </div>
                             )}
@@ -146,38 +147,38 @@ function WatchVideo(props) {
 
                                 <div className="youtube-player__statistics-right">
                                     <div className="youtube-player__likes">
-                                        <a href="#" title="Нравится">
+                                        <NavLink className="no-active" to="" title="Нравится">
                                             <ThumbUpIcon/>
 
                                             {playingVideo.statistics.likeCount}
-                                        </a>
+                                        </NavLink>
                                     </div>
 
                                     <div className="youtube-player__dislikes">
-                                        <a href="#" title="Не нравится">
+                                        <NavLink className="no-active" to="" title="Не нравится">
                                             <ThumbDownIcon/>
                                             {playingVideo.statistics.dislikeCount}
-                                        </a>
+                                        </NavLink>
                                     </div>
 
                                     <div className="youtube-player__send">
-                                        <a href="#" title="Поделиться">
+                                        <NavLink className="no-active" to="" title="Поделиться">
                                             <ReplyIcon/>
                                             Поделиться
-                                        </a>
+                                        </NavLink>
                                     </div>
 
                                     <div className="youtube-player__save">
-                                        <a href="#" title="Сохранить">
+                                        <NavLink className="no-active" to="" title="Сохранить">
                                             <PlaylistAddIcon/>
                                             Сохранить
-                                        </a>
+                                        </NavLink>
                                     </div>
 
                                     <div className="youtube-player__more-options">
-                                        <a href="#">
+                                        <NavLink className="no-active" to="" title="Дополнительные опции">
                                             <MoreHorizIcon/>
-                                        </a>
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>
@@ -189,8 +190,7 @@ function WatchVideo(props) {
                             Следующее
                         </h4>
 
-                        <RowsVideosTemplate videos={similarVideos} className="watch-video__item"
-                                            isWatchCard={true}/>
+                        <RowsVideosTemplate videos={similarVideos} className="watch-video__item" isWatchCard={true}/>
                     </div>
                 </div>}
             </div>
