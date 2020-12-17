@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import Header from "../components/Header";
 import SideBarFull from "../components/SideBarFull";
 import SideBar from "../components/SideBar";

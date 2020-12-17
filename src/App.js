@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,25 +7,19 @@ import {DataContext} from "./context/DataContext";
 import Search from "./pages/Search";
 import InTrends from "./pages/InTrends";
 import Subscribtions from "./pages/Subscribtions";
-import "./scss/default.scss";
 import axios from "./configs/youtube";
 import WatchVideo from "./pages/WatchVideo";
+import "./scss/default.scss";
+import useAuth from "./hooks/auth.hook";
 
 function App() {
-    const [token, setToken] = useState(null);
-    const [user, setUser] = useState(null);
+    const {user, setUser, token, setToken, logout} = useAuth();
     const [subscribtions, setSubscribtions] = useState([]);
 
     const isAuthenticated = !!token;
 
-    const logout = () => {
-        setToken(null);
-        setUser(null);
-        localStorage.removeItem('userData');
-    };
-
-    const getSubscriptions = useCallback(
-        async (maxResults = 30) => {
+    useEffect(() => {
+        async function getSubscribtions(maxResults = 30) {
             try {
                 // каналы пользователя - id`s
                 const channels = await axios.get('/subscriptions', {
@@ -45,6 +39,7 @@ function App() {
                     setSubscribtions(channels.data.items);
                 }
             } catch (e) {
+                console.log('e', e.message);
                 // 1 часовой OAuth token from firebase handler error
                 const storageName = 'userData';
                 const data = JSON.parse(localStorage.getItem(storageName));
@@ -53,37 +48,22 @@ function App() {
                     logout();
                 }
             }
-        }, [token]);
-
-    // проверка авторизации
-    useEffect(() => {
-        const storageName = 'userData';
-
-        const data = JSON.parse(localStorage.getItem(storageName));
-
-        if (data && data.token) {
-            setToken(data.token);
-            setUser(data.user);
-
-            localStorage.setItem(storageName, JSON.stringify({
-                token: data.token, user: data.user
-            }));
         }
-    }, []);
 
-    // загрузка каналов подписчиков
-    useEffect(() => {
         if (token) {
-            getSubscriptions();
+            getSubscribtions();
         }
-    }, [token, getSubscriptions]);
+    }, [logout, token]);
+
 
     console.log('user', user);
-    console.log('subscription', subscribtions);
+    // console.log('token', token);
+    // console.log('subscription', subscribtions);
+    console.log('auth', isAuthenticated);
 
     return (
         <AuthContext.Provider value={{
-            isAuthenticated, token, setToken, user, setUser, logout
+            isAuthenticated, user, setUser, token, setToken, logout
         }}>
             <DataContext.Provider value={{
                 subscribtions
@@ -120,7 +100,7 @@ function App() {
                             </Route>
 
                             <Route path="/watch">
-                                <WatchVideo />
+                                <WatchVideo/>
                             </Route>
 
                             <Route path="/login">

@@ -21,7 +21,6 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
                         maxres : video.snippet.thumbnails.maxres ? video.snippet.thumbnails.maxres.url : '',        //1280x720
                     };
 
-
                     const timeFromPublish = moment(video.snippet.publishedAt).fromNow();
 
                     const channelTitle = video.snippet.channelTitle;

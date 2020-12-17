@@ -1,7 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import VideoCard from "./VideoCard";
 import axios from '../configs/youtube';
-import {AuthContext} from "../context/AuthContext";
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import {DataContext} from "../context/DataContext";
 

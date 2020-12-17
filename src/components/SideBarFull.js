@@ -23,17 +23,16 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Avatar} from "@material-ui/core";
-import {DataContext} from "../context/DataContext";
 
 import '../scss/sidebar-full.scss'
-
+import {DataContext} from "../context/DataContext";
 
 function SideBarFull() {
     const [subsToShow, setSubsToShow] = useState([]);
     const [showSubs, setShowSubs] = useState(false);
 
-    const {isAuthenticated} = useContext(AuthContext);
     const {subscribtions} = useContext(DataContext);
+    const {isAuthenticated} = useContext(AuthContext);
 
     function declOfNum(number, titles) {
         const cases = [2, 0, 1, 1, 1, 2];
@@ -41,7 +40,7 @@ function SideBarFull() {
     }
 
     useEffect(() => {
-        if (subscribtions) {
+        if (subscribtions.length > 0) {
             let subs = subscribtions.slice(0);
 
             if (subscribtions.length > 7 && !showSubs) {
@@ -50,7 +49,11 @@ function SideBarFull() {
                 setSubsToShow(subscribtions);
             }
         }
+
     }, [subscribtions, showSubs]);
+
+    console.log('subscriptions', subscribtions);
+    console.log('substoShow', subsToShow);
 
     return (
         <aside className="sidebar-full">
@@ -115,7 +118,7 @@ function SideBarFull() {
                     <div className="sidebar-full__divider">
                         <h3 className="sidebar-full__header">Подписки</h3>
 
-                        {subsToShow && <Fragment>
+                        {subsToShow.length > 0 ? <Fragment>
                             {subsToShow.map(item => (
                                 <a
                                     key={item.id}
@@ -162,7 +165,9 @@ function SideBarFull() {
                                     </NavLink>
                                 </Fragment>
                             )}
-                        </Fragment>}
+                        </Fragment> : (
+                            <span className="sidebar-full__no-subs">Нет активных подписок</span>
+                        )}
                     </div>
                 )}
 

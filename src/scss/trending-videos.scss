@@ -102,6 +102,10 @@
     }
 
     .video-card__channel {
+      @media (min-width: 576px) {
+        margin-right: 10px;
+      }
+
       @media (min-width: 720px) {
         margin-right: 20px;
       }
@@ -115,6 +119,10 @@
 
     .video-card__img {
       margin-bottom: 0;
+
+      @media (min-width: 720px) {
+        display: block;
+      }
     }
 
     .video-card__description {
@@ -171,7 +179,7 @@
     }
 
     .video-card__paragraph {
-      margin-right: 10px;
+      margin-right: 0;
 
       &:last-child {
         margin-right: 0;

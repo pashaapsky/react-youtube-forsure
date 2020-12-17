@@ -1,40 +1,39 @@
 import React, {useContext, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {AuthContext} from "../context/AuthContext";
-import {firebaseConfig} from "../configs/firebase";
-import firebase from "firebase";
-
-firebase.initializeApp(firebaseConfig);
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/youtube.readonly');
+import {FirebaseContext} from "../context/FirebaseContext";
 
 function Login(props) {
+    const {firebaseApp, firebaseProvider} = useContext(FirebaseContext);
     const {setToken, setUser} = useContext(AuthContext);
     const history = useHistory();
 
     useEffect(() => {
-        const result = firebase.auth().signInWithPopup(provider)
-            .then(res => {
-                    const token = res.credential.accessToken;
-                    const user = res.user;
+        async function login() {
+            await firebaseApp.auth().signInWithPopup(firebaseProvider)
+                .then(res => {
+                        const token = res.credential.accessToken;
+                        const user = res.user;
 
-                    setToken(token);
-                    setUser(user);
+                        setToken(token);
+                        setUser(user);
 
-                    const storageName = 'userData';
+                        const storageName = 'userData';
 
-                    localStorage.setItem(storageName, JSON.stringify({
-                        user, token
-                    }));
+                        localStorage.setItem(storageName, JSON.stringify({
+                            user, token
+                        }));
 
-                    return history.push('/');
-                }
-            )
-            .catch(error => {
-                console.error(error.message)
-            });
-    });
+                        return history.push('/');
+                    }
+                )
+                .catch(error => {
+                    console.error(error.message)
+                })
+        }
+
+        login();
+    }, [firebaseApp, setUser, setToken, history, firebaseProvider]);
 
     return (
         <div></div>

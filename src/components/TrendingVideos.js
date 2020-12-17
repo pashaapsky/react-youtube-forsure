@@ -4,6 +4,7 @@ import VideoCard from "./VideoCard";
 import PetsIcon from '@material-ui/icons/Pets';
 import axios from '../configs/youtube';
 import '../scss/trending-videos.scss'
+import RowsVideosTemplate from "./RowsVideosTemplate";
 
 function TrendingVideos({categoryName, categoryId}) {
     const [videos, setVideos] = useState([]);
@@ -89,35 +90,7 @@ function TrendingVideos({categoryName, categoryId}) {
                 </div>}
 
                 <div className="trend-videos__list videos-list">
-                    {videos.map(video => {
-                        const title = video.snippet.title;
-                        const views = video.statistics.viewCount;
-                        const channelTitle = video.snippet.channelTitle;
-                        const channelId = video.snippet.channelId;
-                        const description = video.snippet.description;
-
-                        const images = {
-                            default : video.snippet.thumbnails.default ? video.snippet.thumbnails.default.url : '',     //120x90
-                            medium : video.snippet.thumbnails.medium ? video.snippet.thumbnails.medium.url : '',        //320x180
-                            high : video.snippet.thumbnails.high ? video.snippet.thumbnails.high.url : '',              //480x360
-                            standard : video.snippet.thumbnails.standard ? video.snippet.thumbnails.standard.url : '',  //640x480
-                            maxres : video.snippet.thumbnails.maxres ? video.snippet.thumbnails.maxres.url : '',        //1280x720
-                        };
-
-                        return (
-                            <VideoCard
-                                className={"trend-videos__item"}
-                                key={video.id}
-                                title={title}
-                                views={`${views} просмотров`}
-                                timestamp="3 дня назад"
-                                channelId={channelId}
-                                channel={channelTitle}
-                                images={images}
-                                description={description}
-                            />
-                        )
-                    })}
+                    <RowsVideosTemplate videos={videos} className="trend-videos__item" showDescription={true}/>
                 </div>
             </div>
         </div>
