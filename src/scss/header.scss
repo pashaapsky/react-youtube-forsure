@@ -63,26 +63,6 @@
     @media (min-width: 720px) {
       max-width: 650px;
     }
-
-    a {
-      display: flex;
-      align-items: center;
-      height: 30px;
-      padding: 0 20px;
-      background-color: #313131;
-
-      outline: 1px solid #313131;;
-
-      color: rgba(255, 255, 255, 0.5);
-
-      transition: all 0.3s linear;
-
-      &:hover {
-        color: rgba(255, 255, 255, 0.8);
-      }
-    }
-
-
   }
 
 
@@ -187,6 +167,26 @@
       margin-right: 10px;
     }
 
+  }
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 20px;
+  background-color: #313131;
+
+  cursor: pointer;
+  outline: 1px solid #313131;
+  border: none;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  transition: all 0.3s linear;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 

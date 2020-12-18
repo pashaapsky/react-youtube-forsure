@@ -25,7 +25,7 @@ function SideBar({hide}) {
                 </NavLink>
 
                 {isAuthenticated && <Fragment>
-                    <NavLink to="/subscribtions" title="Подписки">
+                    <NavLink to="/subscriptions" title="Подписки">
                         <SideBarItem className="sidebar__item" title="Подписки" Icon={SubscriptionsIcon}/>
                     </NavLink>
 

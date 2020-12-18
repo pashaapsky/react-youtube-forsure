@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState, useMemo} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from "../configs/youtube";
 import "../scss/home-videos.scss"
 import RowsVideosTemplate from "./RowsVideosTemplate";
@@ -30,7 +30,7 @@ function HomeVideos(props) {
     // load videos
     useEffect(() => {
         getVideos();
-    }, []);
+    }, [getVideos]);
 
 
     console.log('videos', videos);

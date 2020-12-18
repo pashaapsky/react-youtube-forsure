@@ -2,23 +2,21 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import axios from '../configs/youtube';
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import {DataContext} from "../context/DataContext";
+import {shuffle} from '../helpers/shuffle'
 
 function SubscriptionsVideos() {
     const [videos, setVideos] = useState([]);
-    const {subscribtions} = useContext(DataContext);
+    const {subscriptions} = useContext(DataContext);
 
-    const shuffle = (array) => {
-        array.sort(() => Math.random() - 0.5);
-    };
-
-    const getSubscriptionsVideos = useCallback(
-        async (channelsIds, maxResults = 3) => {
+    // load videos
+    useEffect(() => {
+        const getSubscriptionsVideos = async (channelsIds, maxResults = 3) => {
             try {
                 let videosIds = [];
 
                 // несколько видео с каналов - id`s
                 for (const channel of channelsIds) {
-                    const result = await axios.get('/search', {
+                    await axios.get('/search', {
                         params: {
                             part: "snippet",
                             channelId: channel,
@@ -46,7 +44,7 @@ function SubscriptionsVideos() {
                             .then(res => res.data.items)
                     ;
 
-                    await shuffle(videos);
+                    shuffle(videos);
 
                     if (videos) {
                         setVideos(videos);
@@ -55,17 +53,14 @@ function SubscriptionsVideos() {
             } catch (e) {
                 console.error(e.message);
             }
-        }, []
-    );
+        };
 
-    // load videos
-    useEffect(() => {
-        if (subscribtions) {
+        if (subscriptions) {
             // id каналов
-            const channelsIds = subscribtions.map(item => item.snippet.resourceId.channelId).splice(0,1);
-            // getSubscriptionsVideos(channelsIds);
+            const channelsIds = subscriptions.map(item => item.snippet.resourceId.channelId);
+            getSubscriptionsVideos(channelsIds);
         }
-    }, [subscribtions, getSubscriptionsVideos]);
+    }, [subscriptions]);
 
     console.log('videos', videos);
 

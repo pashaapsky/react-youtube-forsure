@@ -110,7 +110,7 @@ function App() {
                             </Route>
 
                             {isAuthenticated &&
-                            <Route excat path="/subscriptions">
+                            <Route exact path="/subscriptions">
                                 <Subscriptions/>
                             </Route>}
 

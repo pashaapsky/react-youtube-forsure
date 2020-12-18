@@ -88,7 +88,7 @@ function VideoCard({className, videoId, images, title, channel, views, timestamp
 
                 <div className="video-card__text">
                     <h4 className="video-card__header">
-                        {isSearchCard ? (
+                        {isSearchCard || isTrendingCard ? (
                             <a href="" title={title}>
                                 {title}
                             </a>
@@ -119,7 +119,7 @@ function VideoCard({className, videoId, images, title, channel, views, timestamp
 
                     {description && <p className="video-card__description">
                         {isTrendingCard ? (
-                            description.substr(0, 140) + '...'
+                            description.substr(0, 240) + '...'
                         ) : (
                             description.substr(0, 150) + '...'
                         )}

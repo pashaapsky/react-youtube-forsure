@@ -70,7 +70,7 @@ function SideBarFull() {
                     </NavLink>
 
                     {isAuthenticated && (
-                        <NavLink to="/subscribtions" title="Подписки">
+                        <NavLink to="/subscriptions" title="Подписки">
                             <SideBarItem className="sidebar-full__item" title="Подписки" Icon={SubscriptionsIcon}/>
                         </NavLink>
                     )}

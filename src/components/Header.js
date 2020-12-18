@@ -1,4 +1,5 @@
 import React, {Fragment, useContext, useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import {NavLink} from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -15,8 +16,10 @@ import UserActions from "./UserActions";
 import "../scss/header.scss"
 
 function Header() {
-    const {isAuthenticated, user} = useContext(AuthContext);
     const [inputSearch, setInputSearch] = useState('');
+    const {isAuthenticated, user} = useContext(AuthContext);
+
+    const history = useHistory();
 
     const openSideBarFullMenu = () => {
         const sidebarFull = document.querySelector('.sidebar-full');
@@ -29,7 +32,7 @@ function Header() {
         }
     };
 
-
+    // search form toggle on sm
     const openSearch = () => {
         const headerSearchElem = document.querySelector('.header__search');
         const headerHeadingElem = document.querySelector('.header__heading');
@@ -54,10 +57,18 @@ function Header() {
         searchBackBtn.style.display = 'none';
     };
 
+    // toggle profile
     const showProfileActions = () => {
         const profileActions = document.querySelector('.user-actions');
 
         profileActions.classList.toggle('show');
+    };
+
+    // form submit
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        history.push(`/search/${inputSearch}`);
     };
 
 
@@ -80,7 +91,7 @@ function Header() {
                 </NavLink>
             </div>
 
-            <div className="header__search">
+            <form className="header__search">
                 <div className="header__search-back">
                     <ArrowBackIcon onClick={closeSearch}/>
                 </div>
@@ -88,15 +99,16 @@ function Header() {
                 <input
                     className="input-field"
                     type="text"
+                    autoComplete="on"
                     placeholder="Введите запрос"
                     value={inputSearch}
                     onChange={(event) => setInputSearch(event.target.value)}
                 />
 
-                <NavLink to={`/search/${inputSearch}`} title="Введите запрос" className="btn search-btn">
+                <button type="submit" title="Введите запрос" className="btn submit-btn" onClick={submitHandler}>
                     <SearchIcon className="search-field" component="svg"/>
-                </NavLink>
-            </div>
+                </button>
+            </form>
 
             <div className="header__actions">
                 <button className="action-btn search-btn" onClick={openSearch} title="Открыть меню поиска">
