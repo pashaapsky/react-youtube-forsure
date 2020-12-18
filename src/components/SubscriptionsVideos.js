@@ -3,7 +3,7 @@ import axios from '../configs/youtube';
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import {DataContext} from "../context/DataContext";
 
-function SubscribtionsVideos() {
+function SubscriptionsVideos() {
     const [videos, setVideos] = useState([]);
     const {subscribtions} = useContext(DataContext);
 
@@ -84,4 +84,4 @@ function SubscribtionsVideos() {
     );
 }
 
-export default SubscribtionsVideos;
+export default SubscriptionsVideos;

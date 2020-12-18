@@ -5,8 +5,11 @@
 
   background-color: #181818;
 
-  &__container {
-
+  .fixed-container {
+    @media (min-width: 720px) {
+      max-width: 80%;
+      margin: 0 auto;
+    }
   }
 
   &__header {
@@ -22,10 +25,6 @@
     padding: 25px 0 ;
 
     margin: 0;
-
-    @media (min-width: 576px) {
-      margin-top: 30px;
-    }
   }
 
   &__nav {
@@ -85,13 +84,6 @@
 
     .video-card__avatar {
       display: none;
-
-      @media (min-width: 1140px) {
-        display: flex;
-
-        margin-top: 10px;
-        margin-right: 20px;
-      }
     }
 
     .video-card__attr {
@@ -121,7 +113,8 @@
       margin-bottom: 0;
 
       @media (min-width: 720px) {
-        display: block;
+        height: auto;
+        width: 246px;
       }
     }
 
@@ -135,7 +128,7 @@
       }
 
       @media (min-width: 960px) {
-        font-size: 20px;
+        font-size: 14px;
       }
     }
 
@@ -164,10 +157,14 @@
         margin-bottom: 5px;
       }
 
-      @media (min-width: 960px) {
-        font-size: 24px;
-      }
+      @media (min-width: 576px) {
+        flex-grow: 0;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: calc(24/18);
 
+        margin-bottom: 5px;
+      }
     }
 
     .video-card__text {
@@ -186,7 +183,7 @@
       }
 
       @media (min-width: 960px) {
-        font-size: 18px;
+        font-size: 13px;
       }
     }
   }

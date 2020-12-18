@@ -5,7 +5,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import "../scss/video-card.scss"
 import axios from "../configs/youtube";
 
-function VideoCard({className, videoId, images, title, channel, views, timestamp, channelId, description, isSearchCard, isWatchCard}) {
+function VideoCard({className, videoId, images, title, channel, views, timestamp, channelId, description, isSearchCard, isWatchCard, isTrendingCard}) {
     const [channelImage, setChannelImage] = useState('');
 
     // получаем изображение для канала
@@ -37,33 +37,48 @@ function VideoCard({className, videoId, images, title, channel, views, timestamp
 
                     title="Перейти к просмотру"
                 >
-                    <picture>
-                        <source
-                            media="(max-width: 576px)"
-                            srcSet={`${images.medium}`}
-                        />
+                    {isTrendingCard ? (
+                        <picture>
+                            <source
+                                media="(max-width: 576px)"
+                                srcSet={`${images.medium}`}
+                            />
 
-                        <source
-                            media="(max-width: 720px)"
-                            srcSet={`${images.high}`}
-                        />
+                            <img
+                                className=""
+                                src={images.high}
+                                alt="Видео"
+                            />
+                        </picture>
+                    ) : (
+                        <picture>
+                            <source
+                                media="(max-width: 576px)"
+                                srcSet={`${images.medium}`}
+                            />
 
-                        <source
-                            media="(max-width: 960px)"
-                            srcSet={`${images.standard}`}
-                        />
+                            <source
+                                media="(max-width: 720px)"
+                                srcSet={`${images.high}`}
+                            />
 
-                        <source
-                            media="(max-width: 1140px)"
-                            srcSet={`${images.high}`}
-                        />
+                            <source
+                                media="(max-width: 960px)"
+                                srcSet={`${images.standard}`}
+                            />
 
-                        <img
-                            className=""
-                            src={images.high}
-                            alt="Видео"
-                        />
-                    </picture>
+                            <source
+                                media="(max-width: 1140px)"
+                                srcSet={`${images.high}`}
+                            />
+
+                            <img
+                                className=""
+                                src={images.high}
+                                alt="Видео"
+                            />
+                        </picture>
+                    )}
                 </NavLink>
             </div>
 
@@ -103,7 +118,11 @@ function VideoCard({className, videoId, images, title, channel, views, timestamp
                     </div>
 
                     {description && <p className="video-card__description">
-                        {description.substr(0, 150)}...
+                        {isTrendingCard ? (
+                            description.substr(0, 140) + '...'
+                        ) : (
+                            description.substr(0, 150) + '...'
+                        )}
                     </p>}
 
                     {isSearchCard && <span className="video-card__new-badge">

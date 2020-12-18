@@ -5,35 +5,26 @@ import {FirebaseContext} from "../context/FirebaseContext";
 
 function Login(props) {
     const {firebaseApp, firebaseProvider} = useContext(FirebaseContext);
-    const {setToken, setUser} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
     const history = useHistory();
 
     useEffect(() => {
-        async function login() {
-            await firebaseApp.auth().signInWithPopup(firebaseProvider)
-                .then(res => {
-                        const token = res.credential.accessToken;
-                        const user = res.user;
+        async function loginHandler() {
+            
+            try {
+                const result = await firebaseApp.auth().signInWithPopup(firebaseProvider);
 
-                        setToken(token);
-                        setUser(user);
-
-                        const storageName = 'userData';
-
-                        localStorage.setItem(storageName, JSON.stringify({
-                            user, token
-                        }));
-
-                        return history.push('/');
-                    }
-                )
-                .catch(error => {
-                    console.error(error.message)
-                })
+                if (result) {
+                    login(result.user, result.credential.accessToken);
+                    history.push('/');
+                }
+            } catch (e) {
+                console.error(e.message)
+            }
         }
 
-        login();
-    }, [firebaseApp, setUser, setToken, history, firebaseProvider]);
+        loginHandler();
+    }, [firebaseApp, firebaseProvider, history, login]);
 
     return (
         <div></div>

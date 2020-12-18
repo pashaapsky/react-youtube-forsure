@@ -16,7 +16,7 @@ function TrendingVideos({categoryName, categoryId}) {
                 part: "statistics,snippet,player,status",
                 chart: "mostPopular",
                 maxResults: maxResults,
-                regionCode: 'US'
+                regionCode: 'UA'
             };
 
             // если фильтруем по категории
@@ -90,7 +90,7 @@ function TrendingVideos({categoryName, categoryId}) {
                 </div>}
 
                 <div className="trend-videos__list videos-list">
-                    <RowsVideosTemplate videos={videos} className="trend-videos__item" showDescription={true}/>
+                    <RowsVideosTemplate videos={videos} className="trend-videos__item" showDescription={true} isTrendingCard={true}/>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import VideoCard from "./VideoCard";
 
 moment.locale('ru');
 
-function RowsVideosTemplate({videos, className, showDescription, isSearchCard, isWatchCard}) {
+function RowsVideosTemplate({videos, className, showDescription, isSearchCard, isWatchCard, isTrendingCard}) {
     if (videos) {
         return (
             <Fragment>
@@ -45,6 +45,7 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
                             description={descriptions}
                             isSearchCard={isSearchCard}
                             isWatchCard={isWatchCard}
+                            isTrendingCard={isTrendingCard}
                         />
                     )
                 })}

@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import Header from "../components/Header";
 import SideBarFull from "../components/SideBar";
-import SubscribtionsVideos from "../components/SubscribtionsVideos";
+import SubscriptionsVideos from "../components/SubscriptionsVideos";
 
 
-function Subscribtions() {
+function Subscriptions() {
     return (
         <Fragment>
             <Header/>
@@ -12,10 +12,10 @@ function Subscribtions() {
             <div className="content">
                 <SideBarFull/>
 
-                <SubscribtionsVideos />
+                <SubscriptionsVideos />
             </div>
         </Fragment>
     );
 }
 
-export default Subscribtions;
+export default Subscriptions;

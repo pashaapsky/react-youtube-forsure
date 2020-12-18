@@ -6,20 +6,22 @@ import {AuthContext} from './context/AuthContext';
 import {DataContext} from "./context/DataContext";
 import Search from "./pages/Search";
 import InTrends from "./pages/InTrends";
-import Subscribtions from "./pages/Subscribtions";
+import Subscriptions from "./pages/Subscriptions";
 import axios from "./configs/youtube";
 import WatchVideo from "./pages/WatchVideo";
 import "./scss/default.scss";
 import useAuth from "./hooks/auth.hook";
 
 function App() {
-    const {user, setUser, token, setToken, logout} = useAuth();
-    const [subscribtions, setSubscribtions] = useState([]);
+    const {user, setUser, token, setToken, logout, login} = useAuth();
+    const [subscriptions, setSubscriptions] = useState([]);
 
     const isAuthenticated = !!token;
 
     useEffect(() => {
-        async function getSubscribtions(maxResults = 30) {
+        console.log('logout', logout);
+
+        async function getSubscriptions(maxResults = 30) {
             try {
                 // каналы пользователя - id`s
                 const channels = await axios.get('/subscriptions', {
@@ -36,7 +38,7 @@ function App() {
                 ;
 
                 if (channels) {
-                    setSubscribtions(channels.data.items);
+                    setSubscriptions(channels.data.items);
                 }
             } catch (e) {
                 console.log('e', e.message);
@@ -51,22 +53,22 @@ function App() {
         }
 
         if (token) {
-            getSubscribtions();
+            getSubscriptions();
         }
     }, [logout, token]);
 
 
-    console.log('user', user);
+    // console.log('user', user);
     // console.log('token', token);
     // console.log('subscription', subscribtions);
-    console.log('auth', isAuthenticated);
+    // console.log('auth', isAuthenticated);
 
     return (
         <AuthContext.Provider value={{
-            isAuthenticated, user, setUser, token, setToken, logout
+            isAuthenticated, user, setUser, token, setToken, logout, login
         }}>
             <DataContext.Provider value={{
-                subscribtions
+                subscriptions
             }}>
                 <div className="App">
                     <Router>
@@ -108,8 +110,8 @@ function App() {
                             </Route>
 
                             {isAuthenticated &&
-                            <Route excat path="/subscribtions">
-                                <Subscribtions/>
+                            <Route excat path="/subscriptions">
+                                <Subscriptions/>
                             </Route>}
 
                             <Redirect to="/"/>

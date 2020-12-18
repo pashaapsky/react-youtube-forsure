@@ -31,7 +31,7 @@ function SideBarFull() {
     const [subsToShow, setSubsToShow] = useState([]);
     const [showSubs, setShowSubs] = useState(false);
 
-    const {subscribtions} = useContext(DataContext);
+    const {subscriptions} = useContext(DataContext);
     const {isAuthenticated} = useContext(AuthContext);
 
     function declOfNum(number, titles) {
@@ -40,19 +40,19 @@ function SideBarFull() {
     }
 
     useEffect(() => {
-        if (subscribtions.length > 0) {
-            let subs = subscribtions.slice(0);
+        if (subscriptions.length > 0) {
+            let subs = subscriptions.slice(0);
 
-            if (subscribtions.length > 7 && !showSubs) {
+            if (subscriptions.length > 7 && !showSubs) {
                 setSubsToShow(subs.splice(0, 7));
             } else {
-                setSubsToShow(subscribtions);
+                setSubsToShow(subscriptions);
             }
         }
 
-    }, [subscribtions, showSubs]);
+    }, [subscriptions, showSubs]);
 
-    console.log('subscriptions', subscribtions);
+    console.log('subscriptions', subscriptions);
     console.log('substoShow', subsToShow);
 
     return (
@@ -136,12 +136,12 @@ function SideBarFull() {
                                 </a>
                             ))}
 
-                            {subscribtions.length > 7 && showSubs ? (
+                            {subscriptions.length > 7 && showSubs ? (
                                 <Fragment>
                                     <NavLink
                                         className="no-active"
                                         to=""
-                                        title={`Показать еще ${subscribtions.length - 7} каналов`}
+                                        title={`Показать еще ${subscriptions.length - 7} каналов`}
                                         onClick={() => setShowSubs(false)}
                                     >
                                         <li className="sidebar-full__item sidebar-item">
@@ -155,12 +155,12 @@ function SideBarFull() {
                                     <NavLink
                                         className="no-active"
                                         to=""
-                                        title={`Показать еще ${subscribtions.length - 7} каналов`}
+                                        title={`Показать еще ${subscriptions.length - 7} каналов`}
                                         onClick={() => setShowSubs(true)}
                                     >
                                         <li className="sidebar-full__item sidebar-item">
                                             <ExpandMoreIcon/>
-                                            {`Показать еще ${subscribtions.length - 7} ${declOfNum(subscribtions.length - 7, ['канал', 'канала', 'каналов'])}`}
+                                            {`Показать еще ${subscriptions.length - 7} ${declOfNum(subscriptions.length - 7, ['канал', 'канала', 'каналов'])}`}
                                         </li>
                                     </NavLink>
                                 </Fragment>
