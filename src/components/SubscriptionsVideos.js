@@ -1,8 +1,10 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import axios from '../configs/youtube';
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import {DataContext} from "../context/DataContext";
-import {shuffle} from '../helpers/shuffle'
+import {shuffle} from '../helpers/shuffle';
+import '../scss/subscribes-videos.scss';
+
 
 function SubscriptionsVideos() {
     const [videos, setVideos] = useState([]);
@@ -57,12 +59,11 @@ function SubscriptionsVideos() {
 
         if (subscriptions) {
             // id каналов
-            const channelsIds = subscriptions.map(item => item.snippet.resourceId.channelId);
+            const channelsIds = subscriptions.map(item => item.snippet.resourceId.channelId).slice(0,10);
             getSubscriptionsVideos(channelsIds);
         }
     }, [subscriptions]);
 
-    console.log('videos', videos);
 
     return (
         <div className="content-videos subscribes-videos">

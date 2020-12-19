@@ -1,10 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
-import VideoCard from "./VideoCard";
 import PetsIcon from '@material-ui/icons/Pets';
 import axios from '../configs/youtube';
-import '../scss/trending-videos.scss'
 import RowsVideosTemplate from "./RowsVideosTemplate";
+import '../scss/trending-videos.scss'
 
 function TrendingVideos({categoryName, categoryId}) {
     const [videos, setVideos] = useState([]);

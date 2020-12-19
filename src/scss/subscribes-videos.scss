@@ -1,0 +1,42 @@
+.subscribes-videos {
+
+
+
+  .video-card {
+    width: 100%;
+    flex: 1 1 100%;
+
+    @media (min-width: 576px) {
+      width: 48%;
+      flex: 1 1 48%;
+
+      &:nth-child(2n+1) {
+        margin-right: 10px;
+      }
+    }
+
+    @media (min-width: 960px) {
+      flex: 1 1 32%;
+      width: 32%;
+
+      margin-right: 10px;
+
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
+    }
+
+    @media (min-width: 1140px) {
+      flex: 1 1 24%;
+      width: 24%;
+
+      &:nth-child(3n+3) {
+        margin-right: 10px;
+      }
+
+      &:nth-child(4n+4) {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -89,13 +89,13 @@ function VideoCard({className, videoId, images, title, channel, views, timestamp
                 <div className="video-card__text">
                     <h4 className="video-card__header">
                         {isSearchCard || isTrendingCard ? (
-                            <a href="" title={title}>
+                            <NavLink to="" title={title}>
                                 {title}
-                            </a>
+                            </NavLink>
                         ) : (
-                            <a href="" title={title}>
+                            <NavLink to="" title={title}>
                                 {title.length > 47 ? title.substr(0, 47) + '...' : title}
-                            </a>
+                            </NavLink>
                         )}
                     </h4>
 
