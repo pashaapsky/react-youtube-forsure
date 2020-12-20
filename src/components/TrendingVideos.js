@@ -4,13 +4,16 @@ import PetsIcon from '@material-ui/icons/Pets';
 import axios from '../configs/youtube';
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import '../scss/trending-videos.scss'
+import {loadImagesOnScrollEnd} from "../helpers/loadImagesOnScrollEnd";
 
 function TrendingVideos({categoryName, categoryId}) {
     const [videos, setVideos] = useState([]);
+    const [pageToken, setPageToken] = useState('');
 
-    const getVideosByCategoryId = useCallback(
-        async (categoryId = '', maxResults = 12) => {
 
+    // load videos
+    useEffect(() => {
+        const getVideosByCategoryId = async (categoryId = '', maxResults = 12) => {
             const params = {
                 part: "statistics,snippet,player,status",
                 chart: "mostPopular",
@@ -32,16 +35,40 @@ function TrendingVideos({categoryName, categoryId}) {
             if (response) {
                 setVideos(response.data.items);
             }
-        }, []
-    );
+        };
 
-
-    // load videos
-    useEffect(() => {
         getVideosByCategoryId(categoryId)
-    }, [getVideosByCategoryId, categoryId]);
+    }, [categoryId]);
 
-    console.log('videos', videos);
+    // загрузка видео при скролле до конца
+    const getNextPageVideos = useCallback(async (categoryId = '', maxResults = 24) => {
+        try {
+            const params = {
+                part: "statistics,snippet,player,status",
+                chart: "mostPopular",
+                maxResults: maxResults,
+                regionCode: 'UA',
+                pageToken: pageToken
+            };
+
+            if (categoryId) {
+                params.videoCategoryId = categoryId
+            }
+
+            const response = await axios.get('/videos', {params});
+
+            if (response) {
+                setPageToken(response.data.nextPageToken);
+                setVideos([...videos, ...response.data.items]);
+            }
+        } catch (e) {
+            console.error(e.message)
+        }
+    }, [pageToken, videos]);
+
+    useEffect(() => {
+        // loadImagesOnScrollEnd('.trend-videos__item', getNextPageVideos(categoryId));
+    }, [getNextPageVideos, categoryId]);
 
     return (
         <div className="content-videos trend-videos">

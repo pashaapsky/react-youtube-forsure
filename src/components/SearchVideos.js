@@ -1,9 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import TuneIcon from '@material-ui/icons/Tune';
-import "../scss/search-videos.scss"
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import axios from "../configs/youtube";
+
+import "../scss/search-videos.scss"
 
 function SearchVideos(props) {
     const [videos, setVideos] = useState([]);
@@ -56,8 +57,6 @@ function SearchVideos(props) {
         }
     }, [searchTerm, getVideos]);
 
-    console.log(videos);
-
     return (
         <div className="content-videos search-videos">
             <div className="search-videos__container fixed-container">
@@ -73,8 +72,6 @@ function SearchVideos(props) {
                 </div>
             </div>
         </div>
-
-
     );
 }
 

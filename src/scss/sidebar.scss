@@ -20,9 +20,20 @@
     display: flex;
   }
 
-
   &__menu {
     width: 100%;
+
+    button {
+      width: 100%;
+
+      background-color: transparent;
+      border: none;
+      outline: none;
+
+      cursor: pointer;
+
+      padding: 0;
+    }
 
     a.active {
       .sidebar__item {

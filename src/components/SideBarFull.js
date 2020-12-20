@@ -23,8 +23,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Avatar} from "@material-ui/core";
-
 import '../scss/sidebar-full.scss'
+
 import {DataContext} from "../context/DataContext";
 
 function SideBarFull() {
@@ -52,8 +52,6 @@ function SideBarFull() {
 
     }, [subscriptions, showSubs]);
 
-    console.log('subscriptions', subscriptions);
-    console.log('substoShow', subsToShow);
 
     return (
         <aside className="sidebar-full">
@@ -74,17 +72,16 @@ function SideBarFull() {
                             <SideBarItem className="sidebar-full__item" title="Подписки" Icon={SubscriptionsIcon}/>
                         </NavLink>
                     )}
-
                 </div>
 
                 <div className="sidebar-full__divider">
-                    <NavLink className="no-active" to="" title="Библиотека">
+                    <button title="Библиотека">
                         <SideBarItem className="sidebar-full__item" title="Библиотека" Icon={VideoLibraryIcon}/>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="no-active" to="" title="История">
+                    <button title="История">
                         <SideBarItem className="sidebar-full__item" title="История" Icon={HistoryIcon}/>
-                    </NavLink>
+                    </button>
 
                     {isAuthenticated ?? <Fragment>
                         <NavLink className="no-active" to="" title="Ваши видео">
@@ -276,41 +273,41 @@ function SideBarFull() {
                 <div className="sidebar-full__divider">
                     <h3 className="sidebar-full__header">Другие возможности</h3>
 
-                    <NavLink className="no-active gray" to="" title="YouTube Premium">
+                    <button title="YouTube Premium">
                         <SideBarItem className="sidebar-full__item" title="YouTube Premium" Icon={YouTubeIcon}/>
-                    </NavLink>
+                    </button>
 
                     {isAuthenticated && <Fragment>
-                        <NavLink className="no-active" to="" title="Фильмы">
+                        <button title="Фильмы">
                             <SideBarItem className="sidebar-full__item" title="Фильмы" Icon={TheatersIcon}/>
-                        </NavLink>
+                        </button>
 
-                        <NavLink className="no-active" to="" title="Видеоигры">
+                        <button className="no-active" to="" title="Видеоигры">
                             <SideBarItem className="sidebar-full__item" title="Видеоигры" Icon={SportsEsportsIcon}/>
-                        </NavLink>
+                        </button>
                     </Fragment>}
 
-                    <NavLink className="no-active" to="" title="Трансляции">
+                    <button className="no-active" to="" title="Трансляции">
                         <SideBarItem className="sidebar-full__item" title="Трансляции" Icon={CastIcon}/>
-                    </NavLink>
+                    </button>
                 </div>
 
                 <div className="sidebar-full__divider">
-                    <NavLink className="no-active" to="" title="Настройки">
+                    <button title="Настройки">
                         <SideBarItem className="sidebar-full__item" title="Настройки" Icon={SettingsIcon}/>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="no-active" to="" title="Жалобы">
+                    <button title="Жалобы">
                         <SideBarItem className="sidebar-full__item" title="Жалобы" Icon={FlagIcon}/>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="no-active" to="" title="Справка">
+                    <button title="Справка">
                         <SideBarItem className="sidebar-full__item" title="Справка" Icon={HelpIcon}/>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="no-active" to="" title="Отправить отзыв">
+                    <button title="Отправить отзыв">
                         <SideBarItem className="sidebar-full__item" title="Отправить отзыв" Icon={RateReviewIcon}/>
-                    </NavLink>
+                    </button>
                 </div>
 
                 <p className="sidebar-full__author">

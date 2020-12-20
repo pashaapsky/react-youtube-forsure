@@ -105,9 +105,6 @@ function WatchVideo(props) {
     }, [location, watchVideoId]);
 
 
-    // console.log('videos', similarVideos);
-    console.log('video', playingVideo);
-
     return (
         <Fragment>
             <Header/>
@@ -123,8 +120,8 @@ function WatchVideo(props) {
                         <div className="youtube-player__info">
                             {playingVideo.snippet.tags && (
                                 <div className="youtube-player__tags">
-                                    {playingVideo.snippet.tags.slice(0, 3).map(tag => (
-                                        <NavLink to="" className="youtube-player__tag-link no-active">
+                                    {playingVideo.snippet.tags.slice(0, 3).map((tag, index) => (
+                                        <NavLink key={index} to="" className="youtube-player__tag-link no-active">
                                             <span
                                                 className="youtube-player__tag">#{tag.charAt(0).toUpperCase() + tag.slice(1)}&nbsp;</span>
                                         </NavLink>

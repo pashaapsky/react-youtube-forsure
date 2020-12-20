@@ -9,8 +9,9 @@ import InTrends from "./pages/InTrends";
 import Subscriptions from "./pages/Subscriptions";
 import axios from "./configs/youtube";
 import WatchVideo from "./pages/WatchVideo";
-import "./scss/default.scss";
 import useAuth from "./hooks/auth.hook";
+
+import "./scss/default.scss";
 
 function App() {
     const {user, setUser, token, setToken, logout, login} = useAuth();
@@ -19,8 +20,6 @@ function App() {
     const isAuthenticated = !!token;
 
     useEffect(() => {
-        console.log('logout', logout);
-
         async function getSubscriptions(maxResults = 30) {
             try {
                 // каналы пользователя - id`s
@@ -41,7 +40,7 @@ function App() {
                     setSubscriptions(channels.data.items);
                 }
             } catch (e) {
-                console.log('e', e.message);
+                console.error('e', e.message);
                 // 1 часовой OAuth token from firebase handler error
                 const storageName = 'userData';
                 const data = JSON.parse(localStorage.getItem(storageName));
@@ -57,11 +56,6 @@ function App() {
         }
     }, [logout, token]);
 
-
-    // console.log('user', user);
-    // console.log('token', token);
-    // console.log('subscription', subscribtions);
-    // console.log('auth', isAuthenticated);
 
     return (
         <AuthContext.Provider value={{

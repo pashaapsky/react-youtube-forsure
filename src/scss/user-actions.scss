@@ -38,6 +38,11 @@
   &__google-control {
     font-size: 14px;
     color: #3ea6ff;
+
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
   }
 
   &__list {

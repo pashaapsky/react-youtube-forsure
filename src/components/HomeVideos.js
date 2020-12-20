@@ -1,39 +1,88 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "../configs/youtube";
-import "../scss/home-videos.scss"
 import RowsVideosTemplate from "./RowsVideosTemplate";
+import {loadImagesOnScrollEnd} from '../helpers/loadImagesOnScrollEnd'
+
+import "../scss/home-videos.scss"
 
 function HomeVideos(props) {
     const [videos, setVideos] = useState([]);
+    const [pageToken, setPageToken] = useState('');
 
-    const getVideos = useCallback(
-        async (maxResults = 24) => {
+    // load videos
+    useEffect(() => {
+        const getVideos = async (maxResults = 24) => {
+                try {
+                    const params = {
+                        part: "statistics,snippet,player,status",
+                        chart: "mostPopular",
+                        maxResults: maxResults,
+                        regionCode: 'RU'
+                    };
+
+                    const response = await axios.get('/videos', {params});
+
+                    if (response) {
+                        setPageToken(response.data.nextPageToken);
+                        setVideos(response.data.items);
+                    }
+                } catch (e) {
+                    console.error(e.message)
+                }
+            };
+
+        getVideos();
+    }, []);
+
+
+    // загрузка видео при скролле до конца
+    useEffect(() => {
+        const getNextPageVideos = async (maxResults = 24) => {
             try {
                 const params = {
                     part: "statistics,snippet,player,status",
                     chart: "mostPopular",
                     maxResults: maxResults,
-                    regionCode: 'RU'
+                    regionCode: 'RU',
+                    pageToken: pageToken
                 };
 
                 const response = await axios.get('/videos', {params});
 
                 if (response) {
-                    setVideos(response.data.items);
+                    setPageToken(response.data.nextPageToken);
+                    setVideos([...videos, ...response.data.items]);
                 }
             } catch (e) {
                 console.error(e.message)
             }
-        }, []
-    );
+        };
 
-    // load videos
-    useEffect(() => {
-        getVideos();
-    }, [getVideos]);
+        // const loadNewImagesOnScrollEnd = () => {
+        //     const items = document.querySelectorAll('.home-videos__item');
+        //
+        //     if (items.length > 0) {
+        //         const callback = function (entries, observer) {
+        //             entries.forEach((entry) => {
+        //                 if (entry.isIntersecting) {
+        //                     const targetImg = entry.target;
+        //
+        //                     getNextPageVideos();
+        //                     observer.unobserve(targetImg);
+        //                 }
+        //             });
+        //         };
+        //
+        //         const observer = new IntersectionObserver(callback);
+        //         const target = items[items.length - 1];
+        //
+        //         observer.observe(target);
+        //     }
+        // };
 
+        loadImagesOnScrollEnd('.home-videos__item', getNextPageVideos);
+    }, [pageToken, videos]);
 
-    console.log('videos', videos);
 
     return (
         <div className="content-videos home-videos">

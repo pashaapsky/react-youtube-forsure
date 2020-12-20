@@ -33,6 +33,22 @@
     display: flex;
     flex-direction: column;
 
+    button {
+      width: 100%;
+
+      background-color: transparent;
+      border: none;
+      outline: none;
+
+      cursor: pointer;
+
+      padding: 0;
+
+      li {
+        font-weight: 600;
+      }
+    }
+
     a.active {
       svg {
         color: #fff;

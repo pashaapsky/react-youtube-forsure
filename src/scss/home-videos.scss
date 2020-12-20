@@ -1,4 +1,4 @@
-.home-videos {
+.home-videos, .subscribes-videos {
   flex: auto;
 
   color: #aaa;
@@ -7,11 +7,11 @@
 
   .video-card {
     width: 100%;
-    flex: 1 1 100%;
+    flex: 0 1 100%;
 
     @media (min-width: 576px) {
       width: 48%;
-      flex: 1 1 48%;
+      flex: 0 1 48%;
 
       &:nth-child(2n+1) {
         margin-right: 10px;
@@ -19,7 +19,7 @@
     }
 
     @media (min-width: 960px) {
-      flex: 1 1 32%;
+      flex: 0 1 32%;
       width: 32%;
 
       margin-right: 10px;
@@ -30,7 +30,7 @@
     }
 
     @media (min-width: 1140px) {
-      flex: 1 1 24%;
+      flex: 0 1 24%;
       width: 24%;
 
       &:nth-child(3n+3) {

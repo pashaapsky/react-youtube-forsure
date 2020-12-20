@@ -3,7 +3,6 @@ import axios from '../configs/youtube';
 import RowsVideosTemplate from "./RowsVideosTemplate";
 import {DataContext} from "../context/DataContext";
 import {shuffle} from '../helpers/shuffle';
-import '../scss/subscribes-videos.scss';
 
 
 function SubscriptionsVideos() {

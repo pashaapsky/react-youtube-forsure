@@ -29,9 +29,9 @@ function SideBar({hide}) {
                         <SideBarItem className="sidebar__item" title="Подписки" Icon={SubscriptionsIcon}/>
                     </NavLink>
 
-                    <NavLink to="/library" title="Библиотека">
+                    <button title="Библиотека">
                         <SideBarItem className="sidebar__item" title="Библиотека" Icon={VideoLibraryIcon}/>
-                    </NavLink>
+                    </button>
                 </Fragment>}
             </ul>
         </aside>

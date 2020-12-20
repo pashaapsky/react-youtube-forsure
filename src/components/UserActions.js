@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import Avatar from "@material-ui/core/Avatar";
-import {NavLink} from "react-router-dom";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
@@ -38,35 +37,34 @@ function UserActions() {
                         {user.providerData[0].email}
                     </span>
 
-                    <NavLink className="user-actions__google-control no-active" to="">
+                    <button className="user-actions__google-control" title="Управление аккаунтом Google">
                         Управление аккаунтом Google
-                    </NavLink>
+                    </button>
                 </div>
             </div>
 
             <ul className="user-actions__list">
                 <div className="user-actions__divider">
-                    <NavLink className="user-actions__link no-active" to="" title="Мой канал">
+                    <button className="user-actions__link-btn" title="Мой канал">
                         <li className="user-actions__item">
                             <AccountBoxIcon className="user-actions__item-logo"/>
                             Мой канал
                         </li>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="user-actions__link no-active" to=""
-                             title="Покупки и платные подписки">
+                    <button className="user-actions__link-btn" title="Покупки и платные подписки">
                         <li className="user-actions__item">
                             <MonetizationOnIcon className="user-actions__item-logo"/>
                             Покупки и платные подписки
                         </li>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="user-actions__link no-active" to="" title="">
+                    <button className="user-actions__link-btn" title="">
                         <li className="user-actions__item">
                             <SettingsApplicationsIcon className="user-actions__item-logo"/>
                             Творческая студия YouTube
                         </li>
-                    </NavLink>
+                    </button>
 
                     <button className="user-actions__link-btn" title="Выйти" onClick={logout}>
                         <li className="user-actions__item">
@@ -109,33 +107,33 @@ function UserActions() {
                         </li>
                     </button>
 
-                    <NavLink className="user-actions__link no-active" to="" title="Настройки">
+                    <button className="user-actions__link-btn" title="Настройки">
                         <li className="user-actions__item">
                             <SettingsIcon className="user-actions__item-logo"/>
                             Настройки
                         </li>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="user-actions__link no-active" to="" title="Личные данные">
+                    <button className="user-actions__link-btn" title="Личные данные">
                         <li className="user-actions__item">
                             <SecurityIcon className="user-actions__item-logo"/>
                             Личные данные на YouTube
                         </li>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="user-actions__link no-active" to="" title="Справка">
+                    <button className="user-actions__link-btn" title="Справка">
                         <li className="user-actions__item">
                             <HelpIcon className="user-actions__item-logo"/>
                             Справка
                         </li>
-                    </NavLink>
+                    </button>
 
-                    <NavLink className="user-actions__link no-active" to="" title="Отправить отзыв">
+                    <button className="user-actions__link-btn" title="Отправить отзыв">
                         <li className="user-actions__item">
                             <RateReviewIcon className="user-actions__item-logo"/>
                             Отправить отзыв
                         </li>
-                    </NavLink>
+                    </button>
 
                     <button className="user-actions__link-btn" title="Быстрые клавиши">
                         <li className="user-actions__item">
