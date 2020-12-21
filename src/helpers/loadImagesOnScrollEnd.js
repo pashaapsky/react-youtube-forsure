@@ -7,7 +7,6 @@ export const loadImagesOnScrollEnd = (itemClassName, onScrollCallback) => {
                 if (entry.isIntersecting) {
                     const targetImg = entry.target;
 
-                    console.log('entries end');
                     onScrollCallback();
                     observer.unobserve(targetImg);
                 }

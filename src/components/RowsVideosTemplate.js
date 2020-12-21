@@ -9,9 +9,9 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
     if (videos) {
         return (
             <Fragment>
-                {videos.map(video => {
+                {videos.map((video, index) => {
                     const title = video.snippet.title;
-                    const views = new Number(video.statistics.viewCount).toLocaleString('ru-RU');
+                    const views = Number(video.statistics.viewCount).toLocaleString('ru-RU');
 
                     const images = {
                         default : video.snippet.thumbnails.default ? video.snippet.thumbnails.default.url : '',     //120x90
@@ -34,7 +34,7 @@ function RowsVideosTemplate({videos, className, showDescription, isSearchCard, i
                     return (
                         <VideoCard
                             className={className}
-                            key={video.id}
+                            key={index}
                             videoId={video.id}
                             title={title}
                             views={`${views} просмотров`}

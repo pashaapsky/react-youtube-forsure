@@ -58,28 +58,6 @@ function HomeVideos(props) {
             }
         };
 
-        // const loadNewImagesOnScrollEnd = () => {
-        //     const items = document.querySelectorAll('.home-videos__item');
-        //
-        //     if (items.length > 0) {
-        //         const callback = function (entries, observer) {
-        //             entries.forEach((entry) => {
-        //                 if (entry.isIntersecting) {
-        //                     const targetImg = entry.target;
-        //
-        //                     getNextPageVideos();
-        //                     observer.unobserve(targetImg);
-        //                 }
-        //             });
-        //         };
-        //
-        //         const observer = new IntersectionObserver(callback);
-        //         const target = items[items.length - 1];
-        //
-        //         observer.observe(target);
-        //     }
-        // };
-
         loadImagesOnScrollEnd('.home-videos__item', getNextPageVideos);
     }, [pageToken, videos]);
 
